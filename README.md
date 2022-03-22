@@ -1,6 +1,7 @@
-## Janus
+## Janus ![Janus image](https://janus.hss.cmu.edu/janus.png "Janusx")
 
-> **WARNING**
+
+> **DANGER, WILL ROBINSON, DANGER!**
 >
 > **Janus is not yet backed up regularly. This is definitely on the to do list, but not implemented**
 > **Do NOT put your only copy of anything on Janus yet; be sure you have a copy somewhere safer, too**
