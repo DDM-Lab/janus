@@ -118,6 +118,11 @@ Be sure to include a `requirements.txt` file with your code in GitHub, and keep 
 with whatever versions of various packages you are using. Not only will anyone picking up
 your code in five years thank you, you will thank yourself, too.
 
+If you want to use something like TensorFlow, Jason has a relatively high end NVIDIA graphics card
+(10GB GeForce RTX 3080; note that this is *not* the GeForce RTX 3080 Ti). No supporting software
+for such use is yet installed on Janus. It is reputed to be a bit finicky to get right, but
+should certainly be possible.
+
 #### Reverse proxy for Python web applications
 
 ### PHP
@@ -152,3 +157,10 @@ before installing it and overwriting the existing version.
 ### R
 
 #### ShinyIBL
+
+## Why the name Janus?
+
+Janus is the ancient Roman god of beginnings, gates, transitions,
+time, duality, doorways,[2] passages, frames, and endings, and thus by implication
+of decisions. He is also typically depicted with two faces, just as janus.hss.cmu.edu
+has its two faces, online experiments and resource intensive simulations.
