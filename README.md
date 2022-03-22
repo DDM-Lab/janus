@@ -7,7 +7,6 @@
 > **It is highly recommended, both now and even after backups are implemented, that any code you run**
 > **on Janus be stored in the DDMLab’s GitHub world. And that you rapidly extract to your own,**
 > **backed up machine any data collected or generated on Janus.**
->
 
 Janus (`janus.hss.cmu.edu`) is the DDMLab’s new (early 2022) server. It is a 64 core 256 GB Linux box with
 an 8,604 CUDA core graphics card.
@@ -26,9 +25,10 @@ available for online experiments, whose needs are typically more modest. More on
 
 > **NOTE**
 >
-> In what follows mention will be made of various bits of software installed on Janus.
-> As of 22 March 2022 some of these are merely aspirational.
-> Janus is still being configured, and not all these things are installed yet.
+> In what follows mention may be made of various bits of software installed on Janus.
+> As of 22 March 2022 these may be merely aspirational, as both this document and
+> the configuration of Janus remain works in progress.
+> That is, Janus is still being configured, and not everything intended is installed yet.
 > Once they have been installed, this warning note will be removed from this document,
 > but while it remains do not depend upon all these being available. If you need them,
 > sorry for the delay.
@@ -86,3 +86,69 @@ Two notes on the mailing list:
 to subscribe to the list.
 
 ## Best practices
+
+Always bear in mind that Janus is a shared resource, both shared between multiple lab members and
+shared between the use cases of online experiments and big simulations.
+
+By and large, use of Janus should be limited to what it’s both intended for and good at: being a web
+server and an effective compute server. As far as practical, the development of experiments or models
+should be done on your own machine, or some other suitable one, and only moved to Janus when ready
+to be deployed, or to be run in a fashion requiring massive resources.
+
+In particular, it is best not to use Janus as the primary repository of your code.
+The principal, defining version of your software should generally be in the DDMLab GitHub space
+(https://github.com/DDM-Lab), and be cloned to Janus when you are ready to use it there.
+This both ensures a consistent backup of all versions of your work, and simplifies moving
+code between your local machine and Janus to simplify development and minimize the workload
+on Janus.
+
+### Ports
+
+### Python
+
+Please do not install any Python versions or libraries globally, use virtual environments.
+This ensures that we do not break any of the system software that depends upon Python, and
+lets us each install locally for our own use exactly the versions of things we want without
+stepping on one another. This is particularly important in Python which has a long tradition
+of lots of possibly incompatible versions of things.
+
+One popular way of manipulating virtual environments is [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+
+Be sure to include a `requirements.txt` file with your code in GitHub, and keep it current
+with whatever versions of various packages you are using. Not only will anyone picking up
+your code in five years thank you, you will thank yourself, too.
+
+#### Reverse proxy for Python web applications
+
+### PHP
+
+### JavaScript
+
+The version of node.js current in the OS version is installed (as of 22 March 2022 this is version 12.22.5).
+This typically lags behind the very latest and greatest available, but is stable and well tested.
+It will typically be upgraded sometime after a new version appears in the OS repositories, and almost
+certainly whenever the OS is upgraded.
+
+If for some reason you need a newer version of node.js, please discuss it on the `janus-users` mailing list
+before installing it and overwriting the existing version.
+
+TODO discuss npm
+
+#### nodeGame
+
+### SQLite
+
+The version of SQLite 3 current in the OS version is installed (as of 22 March 2022 this is version 3.33.0).
+Note that it must be called as `sqlite3‘, not just `sqlite`, which is obsolete and rarely used.
+This typically lags behind the very latest and greatest available, but is stable and well tested.
+It will typically be upgraded sometime after a new version appears in the OS repositories, and almost
+certainly whenever the OS is upgraded.
+
+If for some reason you need a newer version of sqlite3, please discuss it on the `janus-users` mailing list
+before installing it and overwriting the existing version.
+
+### MySQL
+
+### R
+
+#### ShinyIBL

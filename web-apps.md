@@ -1,6 +1,6 @@
 ![Webapps image](https://github.com/DDM-Lab/janus/blob/main/web-apps.jpg)
 
-Sometimes folks joining the DDMLab are experienced programmers for statistics and modeling, but with no experience writing web applications, but are suddenly thrust in a rôle of having to do just that. Here are some notes jotted down for the help of one such person, who knows Python, that may be of at least a little help to others.
+Sometimes folks joining the DDMLab are experienced programmers for statistics and modeling, but with no experience writing web applications, but are suddenly thrust into a rôle of having to do just that. Here are some notes jotted down for the help of one such person, who knows Python, that may be of at least a little help to others.
 
 First, a couple of bits of general advice. Much, probably most, of what you might find through Google and so on about web programming is aimed at people building web sites, generally ones trying to sell things, or at least trying to be popular. This is, of course, a bit different than what we’re trying to do. In particular
 * Whenever they’re worrying about things that make stuff scale better to many thousands of users, we probably don’t care. A couple of dozen users is probably the most we expect to be banging on things simultaneously.
