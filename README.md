@@ -45,7 +45,7 @@ Typically folks will access Janus through SSH. For example, a user with username
 ssh gandalf@janus.hss.cmu.edu
 ```
 and then be prompted for a password to finish logging in.
-When new account is created the user will be sent an initial password, typically in a separate, cryptic mail message
+When a new account is created the user will be sent an initial password, typically in a separate, cryptic mail message
 that does not mention the account or server name. This should be changed at the earliest
 convenience. Please be sure to change it to something not easily guessed. Ideally it should be at least eight
 characters long and contain all of upper case letters, lower case letters, digits, and non-alphanumeric characters,
@@ -60,6 +60,10 @@ than logging in with a password.
 All users are members of the `ddmlab` group which may be useful for easily sharing write access to files
 that might otherwise be difficult to share. In addition, those users who it is anticipated will be working
 on online experiments, as opposed to simulations, are members of the `www-data` group.
+
+Please do not share login credentials with others. When trouble arises, it really is best if we can
+track who did what to most expeditiously resolve problems. Multiple people masquerading as the same
+user both step on each other’s feet and confuse things.
 
 If you are new to Unix, there is a wealth of information about it available online. Note that you’ll typically
 be interacting with Janus from the command line, so you may want to focus on tutorials and so on that concentrate
