@@ -10,14 +10,15 @@
 >
 
 Janus (`janus.hss.cmu.edu`) is the DDMLab’s new (early 2022) server. It is a 64 core 256 GB Linux box with
-an 8,604 CUDA core graphics card,
-and as of early 2022 is running Pop!_OS version 20.04 LTS, which is essentially the same as
+an 8,604 CUDA core graphics card.
+As of early 2022 Janus is running Pop!_OS version 20.04 LTS, which is essentially the same as
 Ubuntu 20.04 LTS. It is expected that the OS version will be upgraded biennially.
 Janus is located in the DDMLab in Porter Hall, though physical access to the machine should rarely be required.
 
 Janus is intended to be used in two, different ways, that to some extent compete with one another:
 * a web server for running online experiments
 * and a compute server for running resource intensive simulations.
+
 It is important that we don’t let these two uses of one machine interfere with one another.
 The primary responsibility for this is on those running resource intensive applications,
 typically simulations of one sort or another, who need to ensure they leave sufficient resources
@@ -54,9 +55,18 @@ that can be used from various platforms if preferred. And setting up `ssh_keys` 
 logging in without having to type a password is recommended as it is generally more secure
 than logging in with a password.
 
+All users are members of the `ddmlab` group which may be useful for easily sharing write access to files
+that might otherwise be difficult to share.
+
+If you are new to Unix, there is a wealth of information about it available online. Note that you’ll typically
+be interacting with Janus from the command line, so you may want to focus on tutorials and so on that concentrate
+on that, rather than those aimed at GUI users of personal Linux machines. You may also find searching for
+the more general Unix command line rather than the more specific Linux; while there are differences between
+different Unix implementations, the similarities dominate the differences.
+
 There is a mailing list, janus-users@lists.andrew.cmu.edu, to which users and other interested lab members are
 subscribed. Besides announcements of various Janus issues, please also use it to coördinate use of Janus
-that may impact others. For example, you might send a message saying something like
+that may impact others. For example, you might send a message saying something like,
 
 > I’m going to be running a resource intensive simulation for about the next 48 hours, and so it will
 > be difficult for others to use massive resources on Janus during that time. Please let me
@@ -65,3 +75,10 @@ that may impact others. For example, you might send a message saying something l
 And be sure to send that promised followup! And note that, as discussed further below, if you
 are doing something like what is described in this message you should take steps to ensure it
 does not conflict with ongoing on-line experiments run on Jason simultaneously.
+
+Two notes on the mailing list:
+* messages to it are archived; this may help in tracking down any problems that arise in the future
+* folks who do not have accounts on Janus, but are otherwise interested in its use are encouraged
+to subscribe to the list.
+
+## Best practices
