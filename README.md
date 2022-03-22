@@ -1,4 +1,4 @@
-## Janus ![Janus image](https://github.com/DDM-Lab/janus/blob/main/janus.png "Janusx")
+# ![Janus image](https://github.com/DDM-Lab/janus/blob/main/janus.png) Janus
 
 
 > **DANGER, WILL ROBINSON, DANGER!**
