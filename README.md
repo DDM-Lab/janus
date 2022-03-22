@@ -66,7 +66,7 @@ the more general Unix command line rather than the more specific Linux; while th
 different Unix implementations, the similarities dominate the differences.
 
 If you are new to writing online experiments here is
-[some possibly useful advice(https://github.com/DDM-Lab/janus/blob/main/web-apps.md)].
+[some possibly useful advice](https://github.com/DDM-Lab/janus/blob/main/web-apps.md).
 
 There is a mailing list, janus-users@lists.andrew.cmu.edu, to which users and other interested lab members are
 subscribed. Besides announcements of various Janus issues, please also use it to coördinate use of Janus
