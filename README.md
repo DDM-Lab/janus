@@ -56,13 +56,17 @@ logging in without having to type a password is recommended as it is generally m
 than logging in with a password.
 
 All users are members of the `ddmlab` group which may be useful for easily sharing write access to files
-that might otherwise be difficult to share.
+that might otherwise be difficult to share. In addition, those users who it is anticipated will be working
+on online experiments, as opposed to simulations, are members of the `www-data` group.
 
 If you are new to Unix, there is a wealth of information about it available online. Note that you’ll typically
 be interacting with Janus from the command line, so you may want to focus on tutorials and so on that concentrate
 on that, rather than those aimed at GUI users of personal Linux machines. You may also find searching for
 the more general Unix command line rather than the more specific Linux; while there are differences between
 different Unix implementations, the similarities dominate the differences.
+
+If you are new to writing online experiments here is
+[some possibly useful advice(https://github.com/DDM-Lab/janus/blob/main/web-apps.md)].
 
 There is a mailing list, janus-users@lists.andrew.cmu.edu, to which users and other interested lab members are
 subscribed. Besides announcements of various Janus issues, please also use it to coördinate use of Janus
