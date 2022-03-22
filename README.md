@@ -1,4 +1,4 @@
-## Janus ![Janus image](https://janus.hss.cmu.edu/janus.png "Janusx")
+## Janus ![Janus image](http://janus.hss.cmu.edu/janus.png "Janusx")
 
 
 > **DANGER, WILL ROBINSON, DANGER!**
