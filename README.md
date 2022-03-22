@@ -41,7 +41,7 @@ come and go from the lab and new users will need accounts and old accounts will
 disappear.
 
 Typically folks will access Janus through SSH. For example, a user with username gandalf might login with
-    ssh gandalf@janus.hss.cmu.edu
+```ssh gandalf@janus.hss.cmu.edu```
 and then be prompted for a password to finish logging in.
 When new account is created the user will be sent an initial password, typically in a separate, cryptic mail message
 that does not mention the account or server name. This should be changed at the earliest
