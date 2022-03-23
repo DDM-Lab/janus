@@ -65,6 +65,9 @@ Please do not share login credentials with others. When trouble arises, it reall
 track who did what to most expeditiously resolve problems. Multiple people masquerading as the same
 user both step on each other’s feet and confuse things.
 
+In addition to current users, there are also archives of former lab members who had accounts on the old
+machine, Halle, but have left the group, in `/home/former-halle-users`.
+
 If you are new to Unix, there is a wealth of information about it available online. Note that you’ll typically
 be interacting with Janus from the command line, so you may want to focus on tutorials and so on that concentrate
 on that, rather than those aimed at GUI users of personal Linux machines. You may also find searching for
@@ -74,7 +77,8 @@ different Unix implementations, the similarities dominate the differences.
 If you are new to writing online experiments here is
 [some possibly useful advice](https://github.com/DDM-Lab/janus/blob/main/web-apps.md).
 
-There is a mailing list, janus-users@lists.andrew.cmu.edu, to which users and other interested lab members are
+There is a [janus-users mailing list](https://lists.andrew.cmu.edu/mailman/listinfo/janus-users),
+to which users and other interested lab members are
 subscribed. Besides announcements of various Janus issues, please also use it to coördinate use of Janus
 that may impact others. For example, you might send a message saying something like,
 
