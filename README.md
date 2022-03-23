@@ -112,6 +112,10 @@ This both ensures a consistent backup of all versions of your work, and simplifi
 code between your local machine and Janus to simplify development and minimize the workload
 on Janus.
 
+### Resource intensive simulations
+
+TODO limit to no more than 56 cores, no more than 20GB memory. Note that top is your friend.
+
 ### Ports
 
 ### Python
