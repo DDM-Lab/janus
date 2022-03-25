@@ -124,7 +124,7 @@ Please do not install any Python versions or libraries globally, use virtual env
 This ensures that we do not break any of the system software that depends upon Python, and
 lets us each install locally for our own use exactly the versions of things we want without
 stepping on one another. This is particularly important in Python which has a long tradition
-of lots of possibly incompatible versions of things.
+of lots of possibly incompatible versions of things, and is used in the system software.
 
 One popular way of manipulating virtual environments is [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
 
