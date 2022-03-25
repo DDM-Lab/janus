@@ -114,7 +114,7 @@ on Janus.
 
 ### Resource intensive simulations
 
-TODO limit to no more than 56 cores, no more than 200GB memory. Note that top is your friend.
+TODO limit to no more than 56 cores, no more than 200 GB memory. Note that top is your friend.
 
 ### Ports
 
