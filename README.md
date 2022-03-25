@@ -143,17 +143,15 @@ should certainly be possible.
 
 ### JavaScript
 
-The version of node.js current in the OS version is installed (as of 22 March 2022 this is version 12.22.5).
-This typically lags behind the very latest and greatest available, but is stable and well tested.
-It will typically be upgraded sometime after a new version appears in the OS repositories, and almost
-certainly whenever the OS is upgraded.
+The latest (as of 24 March 2022) LTS version of node.js, version 16.14.2, along with npm version 8.5.8 and nodemon 2.0.15, is installed on Janus. This will be upgraded on an irregular basis, though upgrades will be announced on the janus-users mailing list. It will almost certainly be upgraded along with the biennial OS upgrade.
 
-If for some reason you need a newer version of node.js, please discuss it on the `janus-users` mailing list
-before installing it and overwriting the existing version.
+If for some reason you need a different version of node.js please discuss it on janus-users mailing list. It appears that if necessary technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
 
 TODO discuss npm
 
 #### nodeGame
+
+Version 7.1.0 (the latest stable version as of 24 March 2022) of nodeGame is installed in /home/ddmlab/, and configured to start when Janus boots. TODO describe preferred linking strategy, etc, as well as port use.
 
 ### SQLite
 
@@ -175,6 +173,6 @@ before installing it and overwriting the existing version.
 ## Why the name Janus?
 
 Janus is the ancient Roman god of beginnings, gates, transitions,
-time, duality, doorways,[2] passages, frames, and endings, and thus by implication
+time, duality, doorways, passages, frames, and endings, and thus by implication
 of decisions. He is also typically depicted with two faces, just as janus.hss.cmu.edu
 has its two faces, online experiments and resource intensive simulations.
