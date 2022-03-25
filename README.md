@@ -7,9 +7,7 @@
 > **It is highly recommended, both now and even after backups are implemented, that any code you run**
 > **on Janus be stored in the DDMLab’s GitHub world. And that you rapidly extract to your own,**
 > **backed up machine any data collected or generated on Janus.**
->
 
-<<<<<<< HEAD
 Janus (`janus.hss.cmu.edu`) is the DDMLab’s new (early 2022) server. It is a 64 core 256 GB Linux box with
 an 8,604 CUDA core graphics card.
 As of early 2022 Janus is running Pop!_OS version 20.04 LTS, which is essentially the same as
@@ -153,7 +151,13 @@ TODO discuss npm
 
 #### nodeGame
 
-Version 7.1.0 (the latest stable version as of 24 March 2022) of nodeGame is installed in /home/ddmlab/, and configured to start when Janus boots. TODO describe preferred linking strategy, etc, as well as port use.
+Version 7.1.0 (the latest stable version as of 24 March 2022) of nodeGame is installed in /home/ddmlab/experiments/, and configured to start when Janus boots, and serving nodeGame out of port 8080.
+
+In an effort to keep the world on Janus cleaner and tidier than the mess we had on Halle, please use this installation of nodeGame to serve your nodeGame games, rather than installing many copies of nodeGame, each using a different port. To do so
+
+* copy your nodeGame game to /home/ddmlab/experiments
+
+TODO describe preferred linking strategy, etc
 
 ### SQLite
 
@@ -178,8 +182,3 @@ Janus is the ancient Roman god of beginnings, gates, transitions,
 time, duality, doorways, passages, frames, and endings, and thus by implication
 of decisions. He is also typically depicted with two faces, just as janus.hss.cmu.edu
 has its two faces, online experiments and resource intensive simulations.
-=======
-Janus (janus.hss.cmu.edu) is the DDMLab’s new (early 2022) server. It is a 64 core 256 GB Linux box,
-and as of early 2022 is running Pop!_OS version 20.04 LTS, which is essentially the same as
-Ubuntu 20.04 LTS. It is expected that the OS version will be upgraded biennially.
->>>>>>> a951fcb (.)
