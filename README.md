@@ -1,5 +1,7 @@
 # ![Janus image](https://github.com/DDM-Lab/janus/blob/main/janus.png) Janus
 
+*Last updated: 28 March 2022*
+
 > **DANGER, WILL ROBINSON, DANGER!**
 >
 > **Janus is NOT yet backed up regularly. This is definitely on the to do list, but not yet implemented**
@@ -77,7 +79,7 @@ different Unix implementations, the similarities dominate the differences.
 If you are new to writing online experiments here is
 [some possibly useful advice](https://github.com/DDM-Lab/janus/blob/main/web-apps.md).
 
-There is a [janus-users mailing list](https://lists.andrew.cmu.edu/mailman/listinfo/janus-users),
+There is a [`janus-users` mailing list](https://lists.andrew.cmu.edu/mailman/listinfo/janus-users),
 to which users and other interested lab members are
 subscribed. Besides announcements of various Janus issues, please also use it to coördinate use of Janus
 that may impact others. For example, you might send a message saying something like,
@@ -95,6 +97,18 @@ Two notes on the mailing list:
 * folks who do not have accounts on Janus, but are otherwise interested in its use are encouraged
 to subscribe to the list.
 
+## Web server
+
+The lighttpd webserver, version 1.4.55, is installed on Janus, and serves HTTP through port 80.
+We do not yet support TLS (transport layer security, aka HTTPS), but plan to obtain the necessary certificates and serve
+it through port 443.
+
+For serving simple, static files, simply place them in `/var/www/html/` and ensure they are publicly readable,
+or at least readable by the user www-data, though once you’re serving them publicly it is hard to imagine
+why you’d not let them be publicly readable. On the other hand, do **not** make them publicly writable.
+
+TODO reverse proxies
+
 ## Best practices
 
 Always bear in mind that Janus is a shared resource, both shared between multiple lab members and
@@ -106,7 +120,7 @@ should be done on your own machine, or some other suitable one, and only moved t
 to be deployed, or to be run in a fashion requiring massive resources.
 
 In particular, it is best not to use Janus as the primary repository of your code.
-The principal, defining version of your software should generally be in the DDMLab GitHub space
+The principle, defining version of your software should be in the DDMLab GitHub space
 (https://github.com/DDM-Lab), and be cloned to Janus when you are ready to use it there.
 This both ensures a consistent backup of all versions of your work, and simplifies moving
 code between your local machine and Janus to simplify development and minimize the workload
@@ -114,9 +128,61 @@ on Janus.
 
 ### Resource intensive simulations
 
-TODO limit to no more than 56 cores, no more than 200 GB memory. Note that top is your friend.
+Since Janus is a rather powerful machine we believe that with a little care we can use it for
+multiple purposes simultaneously, but this requires some care to ensure that neither use
+excludes the other.
+The primary responsibility for ensure we can use Janus both for online experiments and big simulations
+undoubtedly resides with those running big simulations, though if you are running an unusually
+resource hungry online experiment please adhere to these guidelines, too.
+
+Please limit your use to no more than 200 GB of memory. Memory is probably the single most important
+resource to be sure not to exhaust to ensure others see a responsive machine.
+Fortunately, 200 GB is a **lot** of memory.
+
+It can be a little awkward knowing in advance how much memory you will use, though since
+200 GB is so much, only the most memory intensive applications will need careful attention.
+One easy way to monitor memory usage is to run `top` while your application is running.
+It presents a dynamically updated display of resource usage by all the processes on the machine,
+typically ordered with the current greediest first. Do `man top` on Janus to learn more.
+
+If you plan on running something in a great many of parallel processes or threads, a good
+approach is to run just one to start, run `top` to see how much memory it is using, and do
+the obvious multiplication. If that number exceeds 200 GB, please scale by the number of
+processes or threads you plan to use.
+
+If memory use becomes a problem for us I believe there are technical solutions to limit consumption
+by one user or login, but that seems complicated, prone to unintended consequence, and more than
+what we should need. I think if we’re all reasonably careful we can cohabit peacefully without
+such Draconian measures.
+
+Another resource we want to avoid overtaxing is the number of cores. If folks limit their use
+to no more than 56 cores that should leave more than enough available for concurrent users.
+That is, limit yourself to no more than 56 concurrent processes or threads.
+
+Also, when running large simulations or other things that do not interact with users please
+start them with `nice‘. For example, instead of `python my_big_nasty_simulation.py` simply do
+`nice python my_big_nasty_simulation.py`. This says “if someone else really needs cycles let
+them have first priority.” In practice it will only rarely impact the performance you see, and
+those rare occasions will be when you would otherwise make a mess of someone else’s efforts, likely
+an online experiment. Again, `man nice` will provide some further details.
+
+There are other resources, such as file handles, disk space, and I/O bandwidth that different uses
+of Janus might contend for, but it seems unlikely they will be a problem for us. If we discover
+they are, we’ll revisit how we work.
+
+One other important consideration when running resource intensive applications on Janus is the problem
+that arises when two people do so simultaneously. For example, if two folks are each using 180 GB of memory
+with 48 processes, we’ve got a problem. When you expect to be using lots of resources please coördinate
+with others using the `janus-users` mailing list. And remember it is as important to say “I’m done using most
+of Janus now” as it was to say “I’ve debugged by simulation running in one process and I’m about to start
+it up using 56 of them, and so coming close to saturating the machine.”
+
+If we all adhere to these guidelines we will probably cohabit on Janus with ease. If it turns out that
+even with these there’s trouble, we’ll revisit what we all need to do to ensure success.
 
 ### Ports
+
+TODO
 
 ### Python
 
@@ -135,29 +201,51 @@ your code in five years thank you, you will thank yourself, too.
 If you want to use something like TensorFlow, Jason has a relatively high end NVIDIA graphics card
 (10GB GeForce RTX 3080; note that this is *not* the GeForce RTX 3080 Ti). No supporting software
 for such use is yet installed on Janus. It is reputed to be a bit finicky to get right, but
-should certainly be possible.
+should certainly be possible when needed.
 
 #### Reverse proxy for Python web applications
 
+TODO
+
 ### PHP
+
+TODO
 
 ### JavaScript
 
-The latest (as of 24 March 2022) LTS version of node.js, version 16.14.2, along with npm version 8.5.8 and nodemon 2.0.15, is installed on Janus. This will be upgraded on an irregular basis, though upgrades will be announced on the janus-users mailing list. It will almost certainly be upgraded along with the biennial OS upgrade.
+The latest (as of 24 March 2022) LTS version of node.js, version 16.14.2, along with npm version 8.5.8 and nodemon 2.0.15, is installed on Janus. This will be upgraded on an irregular basis, though upgrades will be announced on the `janus-users` mailing list. It will almost certainly be upgraded along with the biennial OS upgrade.
 
-If for some reason you need a different version of node.js please discuss it on janus-users mailing list. It appears that if necessary technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
+If for some reason you need a different version of node.js please discuss it on the `janus-users` mailing list. It appears that if necessary technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
 
 TODO discuss npm
 
 #### nodeGame
 
-Version 7.1.0 (the latest stable version as of 24 March 2022) of nodeGame is installed in /home/ddmlab/experiments/, and configured to start when Janus boots, and serving nodeGame out of port 8080.
+Version 7.1.0 (the latest stable version as of 24 March 2022) of nodeGame is installed in /home/ddmlab/experiments/, and configured to start when Janus boots, serving nodeGame out of port 8080.
 
 In an effort to keep the world on Janus cleaner and tidier than the mess we had on Halle, please use this installation of nodeGame to serve your nodeGame games, rather than installing many copies of nodeGame, each using a different port. To do so
 
-* copy your nodeGame game to /home/ddmlab/experiments
+* ensure a copy of your game is in the DDMLab GitHub space
+* clone a copy into `/home/ddmlab/experiments/nodegame/games_available/<your-game's-name>`
+* ensure it is readable by the `ddmlab` group; assuming the usual permissions, this can be done with
+`chgrp -R ddmlab /home/ddmlab/experiments/nodegame/games_available/<your-game's-name>`
+* ensure the `data` sub-directory is writable by group, too; this can be done with
+`chmod -R g+w /home/ddmlab/experiments/nodegame/games_available/<your-game's-name>/data`
+* create in `/home/ddmlab/experiments/nodegame/games/` a symbolic link to your game; this can be done with
+`cd /home/ddmlab/experiments/nodegame/games/ ; ln -s ../games_available/<your-game's-name> ./`
+* ensure, probably by using the `janus-users` mailing list, that nodeGame coming down will not impact anyone else,
+and then restart nodeGame with `sudo systemctl restart nodegame`
 
-TODO describe preferred linking strategy, etc
+See the existing games linked to from `…/nodegame/games/` for examples.
+
+Note that if you are installing a nodeGame game written against an earlier version of nodeGame there
+may be some minor changes that are needed. One likely one is that the argument signature to the
+`stager` function has changed. Stefano has arranged that the old functions will continue to work,
+at least for a while, but it would be best to update them. This can be easily done just by changing the
+line `module.exports = function(stager, settings) {`
+to `module.exports = function(treatmentName, settings, stager, setup, gameRoom) {`
+in `game.stages.js`.
+
 
 ### SQLite
 
@@ -172,9 +260,15 @@ before installing it and overwriting the existing version.
 
 ### MySQL
 
+TODO
+
 ### R
 
+TODO
+
 #### ShinyIBL
+
+TODO
 
 ## Why the name Janus?
 
