@@ -170,7 +170,8 @@ they are, we’ll revisit how we work.
 
 One other important consideration when running resource intensive applications on Janus is the problem
 that arises when two people do so simultaneously. For example, if two folks are each using 180 GB of memory
-with 48 processes, we’ve got a problem. When you expect to be using lots of resources please coördinate
+with 48 processes, we’ve got a problem; instead one of you should run first, and then the other when
+the first has finished. When you expect to be using lots of resources please coördinate
 with others using the `janus-users` mailing list. And remember it is as important to say “I’m done using most
 of Janus now” as it was to say “I’ve debugged by simulation running in one process and I’m about to start
 it up using 56 of them, and so coming close to saturating the machine.”
