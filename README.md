@@ -1,7 +1,5 @@
 # ![Janus image](https://github.com/DDM-Lab/janus/blob/main/janus.png) Janus
 
-*Last updated: 28 March 2022*
-
 > **DANGER, WILL ROBINSON, DANGER!**
 >
 > **Janus is NOT yet backed up regularly. This is definitely on the to do list, but not yet implemented**
