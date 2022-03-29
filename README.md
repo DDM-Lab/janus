@@ -158,7 +158,7 @@ to no more than 56 cores that should leave more than enough available for concur
 That is, limit yourself to no more than 56 concurrent processes or threads.
 
 Also, when running large simulations or other things that do not interact with users please
-start them with `nice‘. For example, instead of `python my_big_nasty_simulation.py` simply do
+start them with `nice`. For example, instead of `python my_big_nasty_simulation.py` simply do
 `nice python my_big_nasty_simulation.py`. This says “if someone else really needs cycles let
 them have first priority.” In practice it will only rarely impact the performance you see, and
 those rare occasions will be when you would otherwise make a mess of someone else’s efforts, likely
