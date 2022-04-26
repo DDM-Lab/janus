@@ -17,11 +17,9 @@ Port,State,Who,Purpose
 5700,open,Ngoc,minimap
 5701,open,Ngoc,minimap demo
 5702,open,Ngoc,team minimap demo
-8021,open,dfm,nodegame twobytwo game
+8080,open,dfm,nodeGame
 8083,closed,,MAD game
 8084,open,Yinuo,Yinuo testing
-8085,closed,,Nodegame for Coty's class
-8086,open,dfm,investment game
 8970,closed,dfm,moments@cmu (aka moments2)
 8971,open,dfm,dynamic stocks and flows
 ,,,
