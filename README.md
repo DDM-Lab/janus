@@ -23,15 +23,8 @@ The primary responsibility for this is on those running resource intensive appli
 typically simulations of one sort or another, who need to ensure they leave sufficient resources
 available for online experiments, whose needs are typically more modest. More on this below.
 
-> **NOTE**
->
-> In what follows mention may be made of various bits of software installed on Janus.
-> As of 22 March 2022 these may be merely aspirational, as both this document and
-> the configuration of Janus remain works in progress.
-> That is, Janus is still being configured, and not everything intended is installed yet.
-> Once they have been installed, this warning note will be removed from this document,
-> but while it remains do not depend upon all these being available. If you need them,
-> sorry for the delay.
+Note that the name `ddmlab.com` also points at Janus, and for most purposes is interchangeable
+with `janus.hss.cmu.edu`.
 
 ## User accounts on Janus
 
@@ -258,7 +251,7 @@ should certainly be possible when needed.
 
 ### PHP
 
-TODO
+PHP is not yet installed on Janus, but should be soon.
 
 ### JavaScript
 
@@ -313,15 +306,30 @@ before installing it and overwriting the existing version.
 
 ### MySQL
 
-TODO
+The version of the MariaDB fork of MySQL current in the OS version is
+installed (as of 26 April this is version 10.3.34), with InnoDB as the
+default underlying engine. It will typically be upgraded sometime
+after a new version appears in the OS repositories, and almost
+certainly whenever the OS is upgraded.
+
+Only a few current members of the lab had user accounts in MySQL on Halle, and these have
+been duplicated in MySQL on Janus, with the same permissions. I have also tried to duplicate
+the passwords (which are not in clear text only hashed, so I don’t actually know them), but
+the way user info is configured in recent versions has changed sufficiently from the older
+version on Halle I’m not sure I’ve gotten it right. Please let me (dfm) know if you have any trouble.
+
+All the MySQL databases from Halle have also been copied to Janus. The contents of these databases
+on Janus are what they were on Halle late in the afternoon of 25 April 2022. Any changes to them on
+Halle since then will require updating the corresponding database on Janus. This should not be difficult.
 
 ### R
 
-TODO
+While not yet done, there will soon be some version of R installed on Janus,
+if only to support ShinyIBL.
 
 #### ShinyIBL
 
-TODO
+While not yet done, ShinyIBL will be migrating from Halle to Janus sometime soon.
 
 ## Why the name Janus?
 
