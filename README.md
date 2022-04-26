@@ -179,9 +179,49 @@ even with these there’s trouble, we’ll revisit what we all need to do to ens
 
 ### Ports
 
-TODO
+We typically run our online experiments out of lots of different
+ports. This means we need to open these ports in the firewall to
+enable access. In addition, some ports need to be used for interprocess
+communication within Janus; it is important that these ports **not** be
+open in the firewall, as they are almost always running insecure protocols.
 
-[test](https://github.com/DDM-Lab/janus/blob/main/test.csv)
+Since port numbers are a global name space it is
+important we not step on each others’ toes in our uses of them.
+Please choose your ports as follows:
+* Ports numbered 1024 and lower are special and should not be used, other than
+  for their designated, well known applications such as SSH, HTTP and HTTPS.
+  Please do not open any ports in this range without discussing it on the
+  mailing list. Note also that applications using ports in this range must
+  be run as root, which is yet a further security complication.
+* For now, please do not use ports greater than 1024 but less than 3000.
+* When exposing experiments to the cruel, outside world please use ports numbered
+  3000 or greater, but less than 9000.
+* When using ports for internal interprocess communication please use ports numbered
+  9000 or greater but less than 10000.
+* Please do not use ports numbered 10000 or greater.
+
+To coördinate our use of ports there is in the Janus repo in the DDMLab GitHub space a
+[CSV file port usage table](https://github.com/DDM-Lab/janus/blob/main/ports.csv).
+Please “claim” any port you need to use here, and fill out all four fields for each.
+
+When opening ports in the firewall please include a comment stating the purpose of the open port.
+This should be the same as the Purpose column in the above spreadsheet.
+
+Open ports are the primary source of vulnerabilities of web servers. When you no longer
+need an open port (which should be in the range 3000 to 8999) please close it
+(that is, delete the `ufw` rule that had allowed access to that port through the firewall),
+and update the usage table. If you wish to retain a claim to the port number for
+possible future reuse, please simply change its state from “open” to “closed.”
+
+Note that as of 26 April 2022 most of the port assignments from Halle have been copied to Janus.
+For some it is unclear who is responsible, and in that case the who column has been left blank for now.
+Some that were open on Halle are not yet open on Janus as it isn’t clear they are being used currently.
+If any that are open are no longer needed please either close them and update the sheet, or
+let me (dfm) know and I’ll take care of it.
+
+### Shared Waiting Room
+
+TODO
 
 ### Python
 
@@ -201,10 +241,6 @@ If you want to use something like TensorFlow, Jason has a relatively high end NV
 (10GB GeForce RTX 3080; note that this is *not* the GeForce RTX 3080 Ti). No supporting software
 for such use is yet installed on Janus. It is reputed to be a bit finicky to get right, but
 should certainly be possible when needed.
-
-#### Reverse proxy for Python web applications
-
-TODO
 
 ### PHP
 

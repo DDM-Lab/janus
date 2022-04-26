@@ -1,0 +1,29 @@
+Port,State,Who,Purpose
+22,open,dfm,ssh
+80,open,dfm,http
+443,open,dfm,https
+,,,
+3000,open,Ngoc,gridworld
+3001,open,Ngoc,gridworld demo
+3002,closed,dfm,moments@work
+3004,open,Ngoc,gridworld for Coty's class
+3005,open,Ngoc,minimap for Coty's class
+3006,open,Ngoc,onestep gridworld demo
+3838,open,dfm / Erin B,shinyibl
+5000,closed,,box game
+5001,closed,,box game 2
+5002,closed,,box game 3
+5003,closed,,box game 4
+5700,open,Ngoc,minimap
+5701,open,Ngoc,minimap demo
+5702,open,Ngoc,team minimap demo
+8021,open,dfm,nodegame twobytwo game
+8083,closed,,MAD game
+8084,open,Yinuo,Yinuo testing
+8085,closed,,Nodegame for Coty's class
+8086,open,dfm,investment game
+8970,closed,dfm,moments@cmu (aka moments2)
+8971,open,dfm,dynamic stocks and flows
+,,,
+9140,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
+9141,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
