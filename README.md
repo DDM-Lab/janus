@@ -105,8 +105,6 @@ For serving simple, static files, simply place them in `/var/www/html/` and ensu
 or at least readable by the user www-data, though once you’re serving them publicly it is hard to imagine
 why you’d not let them be publicly readable. On the other hand, do **not** make them publicly writable.
 
-TODO reverse proxies
-
 ## Best practices
 
 Always bear in mind that Janus is a shared resource, both shared between multiple lab members and
@@ -183,6 +181,8 @@ even with these there’s trouble, we’ll revisit what we all need to do to ens
 
 TODO
 
+[test](https://github.com/DDM-Lab/janus/blob/main/test.csv)
+
 ### Python
 
 Please do not install any Python versions or libraries globally, use virtual environments.
@@ -235,7 +235,12 @@ In an effort to keep the world on Janus cleaner and tidier than the mess we had 
 * ensure, probably by using the `janus-users` mailing list, that nodeGame coming down will not impact anyone else,
 and then restart nodeGame with `sudo systemctl restart nodegame`
 
-See the existing games linked to from `…/nodegame/games/` for examples.
+See the existing links in `…/nodegame/games/` for examples.
+
+The URL to direct folks to your game will be `http://ddmlab.com:8080/<your-game's-name>` (assuming
+you have named your game internally to match the name in the file system; if not it is the
+internally assigned name that should go into the URL). Please do **not** direct users to the top
+level `http://ddmlab.com:8080/`.
 
 Note that if you are installing a nodeGame game written against an earlier version of nodeGame there
 may be some minor changes that are needed. One likely one is that the argument signature to the
@@ -244,7 +249,6 @@ at least for a while, but it would be best to update them. This can be easily do
 line `module.exports = function(stager, settings) {`
 to `module.exports = function(treatmentName, settings, stager, setup, gameRoom) {`
 in `game.stages.js`.
-
 
 ### SQLite
 
