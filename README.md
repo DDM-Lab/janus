@@ -177,6 +177,20 @@ it up using 56 of them, and so coming close to saturating the machine.”
 If we all adhere to these guidelines we will probably cohabit on Janus with ease. If it turns out that
 even with these there’s trouble, we’ll revisit what we all need to do to ensure success.
 
+### Online experiments
+
+In general online experiments are probably the biggest exposure of Janus to malefactors.
+While we are not likely to be an appealing target, if we are not careful we will surely be
+attacked, sooner or later.
+
+To minimize our exposure, please
+* run you experiment code only when needed for testing, data collection or demonstration purposes
+  (demos may well need to run all the time, of course), and shut it down when not being actively
+  used;
+* and when you are no longer running an experiment, or don’t intend to do so again for a very long
+  long time, if it was being served out of a dedicated port please close that port in the
+  firewall — see the next section for more details on port usage
+
 ### Ports
 
 We typically run our online experiments out of lots of different
