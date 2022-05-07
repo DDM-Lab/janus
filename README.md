@@ -292,7 +292,7 @@ For more details of the PHP installation point a browser at [phpinfo.php](http:/
 
 The latest (as of 24 March 2022) LTS version of node.js, version 16.14.2, along with npm version 8.5.8 and nodemon 2.0.15, is installed on Janus. This will be upgraded on an irregular basis, though upgrades will be announced on the `janus-users` mailing list. It will almost certainly be upgraded along with the biennial OS upgrade.
 
-If for some reason you need a different version of node.js please discuss it on the `janus-users` mailing list. It appears that if necessary technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
+If for some reason you need a different version of node.js please discuss it on the `janus-users` mailing list. It appears that, if necessary, technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
 
 TODO maybe discuss npm here
 
