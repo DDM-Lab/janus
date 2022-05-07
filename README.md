@@ -1,13 +1,5 @@
 # ![Janus image](https://github.com/DDM-Lab/janus/blob/main/janus.png) Janus
 
-> **DANGER, WILL ROBINSON, DANGER!**
->
-> **Janus is NOT yet backed up regularly. This is definitely on the to do list, but not yet implemented**
-> **Do NOT put your only copy of anything on Janus yet; be sure you have a copy somewhere safer, too**
-> **It is highly recommended, both now and even after backups are implemented, that any code you run**
-> **on Janus be stored in the DDMLab’s GitHub world. And that you rapidly extract to your own,**
-> **backed up machine any data collected or generated on Janus.**
-
 Janus (`janus.hss.cmu.edu`) is the DDMLab’s new (early 2022) server. It is a 64 core 256 GB Linux box with
 an 8,604 CUDA core graphics card.
 As of early 2022 Janus is running Pop!_OS version 20.04 LTS, which is essentially the same as
@@ -59,12 +51,12 @@ track who did what to most expeditiously resolve problems. Multiple people masqu
 user both step on each other’s feet and confuse things.
 
 In addition to current users, there are also archives of former lab members who had accounts on the old
-machine, Halle, but have left the group, in `/home/former-halle-users`.
+machine, Halle, but have left the group, in `/home/former-halle-users/`.
 
 If you are new to Unix, there is a wealth of information about it available online. Note that you’ll typically
 be interacting with Janus from the command line, so you may want to focus on tutorials and so on that concentrate
 on that, rather than those aimed at GUI users of personal Linux machines. You may also find searching for
-the more general Unix command line rather than the more specific Linux; while there are differences between
+the more general Unix command line useful rather than the more specific Linux; while there are differences between
 different Unix implementations, the similarities dominate the differences.
 
 If you are new to writing online experiments here is
@@ -88,14 +80,36 @@ Two notes on the mailing list:
 * folks who do not have accounts on Janus, but are otherwise interested in its use are encouraged
 to subscribe to the list.
 
+## Backups
+
+Janus is backed up to an attached, external disk in the wee hours every day.
+If you want to copy anything out of the backup, have a look at `/backups/`.
+Please do **not** delete or modify anything on that disk, however!
+
+Three important warnings:
+  * The backup only happens once a day. Anything changed or added since that last backup is **not** backed up.
+  * The backup disk is on the desk right above Janus. If Janus is taken out by, say, a flood, fire or theft,
+    odds are the backup disk will be, too.
+  * It’s all still just computer hardware and software, so things could go wrong with the automated backup
+    and we might not find out about it for a while.
+
+In other words, be careful. If you have really precious data, periodically copy it to multiple other places,
+geographically remote from the DDMLab.
+
+Exploration is afoot on a cloud backup system that will run more continuously, and back things up
+remotely, albeit not as transparently. We probably won’t have a proper understanding of how well
+this system works for at least a few more weeks, but if it seems worthwhile note that it will be
+in addition to the nightly backup described above. This document will be updated once a decision is
+reached on this cloud backup scheme.
+
 ## Web server
 
 The lighttpd webserver, version 1.4.55, is installed on Janus, and serves HTTP through port 80.
-We do not yet support TLS (transport layer security, aka HTTPS), but plan to obtain the necessary certificates and serve
-it through port 443.
+We do not yet support TLS (transport layer security, aka HTTPS), but may obtain the necessary certificates and serve
+it through port 443 if a need arises. As of right now, there does not appear to be such a need.
 
 For serving simple, static files, simply place them in `/var/www/html/` and ensure they are publicly readable,
-or at least readable by the user www-data, though once you’re serving them publicly it is hard to imagine
+or at least readable by the user `www-data`, though once you’re serving them publicly it is hard to imagine
 why you’d not let them be publicly readable. On the other hand, do **not** make them publicly writable.
 
 ## Best practices
@@ -136,11 +150,11 @@ typically ordered with the current greediest first. Do `man top` on Janus to lea
 
 If you plan on running something in a great many of parallel processes or threads, a good
 approach is to run just one to start, run `top` to see how much memory it is using, and do
-the obvious multiplication. If that number exceeds 200 GB, please scale by the number of
-processes or threads you plan to use.
+the obvious multiplication. If that number exceeds 200 GB, please reduce the number of
+processes or threads you plan to use accordingly.
 
 If memory use becomes a problem for us I believe there are technical solutions to limit consumption
-by one user or login, but that seems complicated, prone to unintended consequence, and more than
+by one user or login, but that seems complicated, prone to unintended consequences, and more than
 what we should need. I think if we’re all reasonably careful we can cohabit peacefully without
 such Draconian measures.
 
@@ -226,9 +240,22 @@ Some that were open on Halle are not yet open on Janus as it isn’t clear they 
 If any that are open are no longer needed please either close them and update the sheet, or
 let me (dfm) know and I’ll take care of it.
 
-### Shared Waiting Room
+### Applications that should always run
 
-TODO
+Most of our online experiments have relatively short lifetimes, and don’t need to automatically restart
+when Janus is rebooted. In fact, it’s probably best that they don’t in case we forget to stop them
+when no longer needed.
+
+But some do need to run 7/24, for example permanent demos. For these
+a [systemd](https://www.digitalocean.com/community/tutorials/systemd-essentials-working-with-services-units-and-the-journal)
+service definition file should be created, put into `/etc/systemd/system/`, and enabled.
+
+For a simple example of such a file see `/etc/systemd/system/nodegame.service`.
+
+### Shared waiting room
+
+There is a shared waiting room, implemented in nodeGame, available on Janus. Documenting this
+further remains a TODO here.
 
 ### Python
 
@@ -251,7 +278,15 @@ should certainly be possible when needed.
 
 ### PHP
 
-PHP is not yet installed on Janus, but should be soon.
+Version 7.4.3 of PHP is installed on Janus, using fast-cgi through the lighttpd web server.
+Updating from this version may prove problematic as it appears PHP
+version 8 and later include several incompatible changes which may break old PHP applications. However,
+at some point we may need to upgrade it. We’ll deal with those problems when we must, but not yet.
+
+To access PHP simply put your PHP files in `/var/www/html` or (usually better) a subdirectory thereof, and ensure
+they have the extension `.php`, and access them in usual way from a web browser through port 80.
+
+For more details of the PHP installation point a browser at [phpinfo.php](http://ddmlab.com/phpinfo.php).
 
 ### JavaScript
 
@@ -259,7 +294,7 @@ The latest (as of 24 March 2022) LTS version of node.js, version 16.14.2, along 
 
 If for some reason you need a different version of node.js please discuss it on the `janus-users` mailing list. It appears that if necessary technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
 
-TODO discuss npm
+TODO maybe discuss npm here
 
 #### nodeGame
 
@@ -293,6 +328,19 @@ line `module.exports = function(stager, settings) {`
 to `module.exports = function(treatmentName, settings, stager, setup, gameRoom) {`
 in `game.stages.js`.
 
+### R
+
+R version 3.6.3 is installed. Unless there is a demand it will only be upgraded infrequently.
+
+#### Shiny Server
+
+The R Shiny Server version 1.7.1 is also installed. Again it is unlikely to be upgraded unless there is a demand.
+It serves through port 3838.
+To deploy applications simply place them in an appropriately named subdirectory of `/srv/shiny-server/`.
+So, for example, if your application is in `/srv/shiny-server/mumble/` users get at it with a URL
+like `http://ddmlab.com:3838/mumble/`.
+See `/srv/shiny-server/shinyibl/` for an example.
+
 ### SQLite
 
 The version of SQLite 3 current in the OS version is installed (as of 22 March 2022 this is version 3.33.0).
@@ -321,15 +369,6 @@ version on Halle I’m not sure I’ve gotten it right. Please let me (dfm) know
 All the MySQL databases from Halle have also been copied to Janus. The contents of these databases
 on Janus are what they were on Halle late in the afternoon of 25 April 2022. Any changes to them on
 Halle since then will require updating the corresponding database on Janus. This should not be difficult.
-
-### R
-
-While not yet done, there will soon be some version of R installed on Janus,
-if only to support ShinyIBL.
-
-#### ShinyIBL
-
-While not yet done, ShinyIBL will be migrating from Halle to Janus sometime soon.
 
 ## Why the name Janus?
 
