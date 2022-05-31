@@ -286,7 +286,7 @@ at boot time, also call
 
 `sudo su -c ’pm2 save’ ddmlab`
 
-This causes the newly update list of demos to be saved for restart at boot time.
+This causes the newly updated list of demos to be saved for restart at boot time.
 
 Please do **not** defeat pm2’s efforts to run your demo as `ddmlab` and try to run it
 as root instead. Running a demo as root is simply a disaster waiting to happen.
