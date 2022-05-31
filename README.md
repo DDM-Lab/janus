@@ -198,6 +198,8 @@ To minimize our exposure, please
 * run you experiment code only when needed for testing, data collection or demonstration purposes
   (demos may well need to run all the time, of course), and shut it down when not being actively
   used;
+* run it as an ordinary user, **never** as root; for experiments your own userid is probably fine,
+  but for demos it’s best to use the user `ddmlab`;
 * and when you are no longer running an experiment, or don’t intend to do so again for a very long
   long time, if it was being served out of a dedicated port please close that port in the
   firewall — see the next section for more details on port usage
@@ -217,7 +219,8 @@ Please choose your ports as follows:
   for their designated, well known applications such as SSH, HTTP and HTTPS.
   Please do not open any ports in this range without discussing it on the
   mailing list. Note also that applications using ports in this range must
-  be run as root, which is yet a further security complication.
+  be run, or at least started, as root, which is yet a further security complication,
+  and requires extra care and discusson.
 * For now, please do not use ports greater than 1024 but less than 3000.
 * When exposing experiments to the cruel, outside world please use ports numbered
   3000 or greater, but less than 9000.
@@ -248,30 +251,45 @@ let me (dfm) know and I’ll take care of it.
 
 Most of our online experiments have relatively short lifetimes, and don’t need to automatically restart
 when Janus is rebooted. In fact, it’s probably best that they don’t in case we forget to stop them
-when no longer needed.
+when no longer needed (but please, do remember to stop them!).
 
-But some do need to run 7/24, for example permanent demos. For these
-a [systemd](https://www.digitalocean.com/community/tutorials/systemd-essentials-working-with-services-units-and-the-journal)
-service definition file should be created, put into `/etc/systemd/system/`, and enabled.
+But some do need to run 7/24, for example permanent demos. The
+[pm2 process manager](https://pm2.keymetrics.io/) is running on Janus, and using this is
+usually the simplest way to accomplish this. New demos can be added to those started by `pm2`
+simply by calling `pm2 start` with suitable arguments. However, it is important to only call
+`pm2` while running as the user `ddmlab`, lest you instead start a new instance of it running
+as yourself. So, to start a demo initialized by running `run-demo.sh` in the current directly, do
 
-Please do **not** have such permanent applications run as the `root` user. This is a classic exposure
-to attach from the outside. While less of a problem, it is best that they not run as you, either, as
-they may need to keep running after you’ve left the lab and your account disappears. It is best to
-have them run as some “user” who will always be here. A good choice is as the user `ddmlab`.
-Note that while you cannot initially login as the user `ddmlab`, you can, when necessary, masquerade
-as that user by doing something like `sudo su ddmlab`.
+`sudo su -c ’pm2 start run-demo.sh’`
 
-For a simple example of such a service file see `/etc/systemd/system/nodegame.service`.
+For demos using node.js create a configuration file, for example `ecosystem.config.js` describing
+your demo and do, while cd’ed to the appropriate directory,
+
+`sudo su -c ’pm2 start ecosystem.config.js’`
+
+For an example of this, see `~ddmlab/demonstrations/gridworld-game-DEMO`
 
 For Python, you’ll also need activate the appropriate virtual environment. For such permanent applications
 and demos, Miniconda/Anaconda are not really suitable as conda environments are tied to users and require
 use from a login shell. For demos and the like it is better to use `venv`. This consideration is less of
 an issue for ordinary experiments where you will be starting and stopping them yourself by hand anyway.
-To write a service file with a virtual environment you will need to encapsulate the activation of the
+To start such a Python bassed demo you will need to encapsulate the activation of the
 environment and subsequent running of the application into a simple shell script.
-See `/etc/systemd/system/minimap-demo.service`
-and `/home/ddmlab/demonstrations/minimap-DEMO/start.sh`
-for an example of how to do this.
+See `/home/ddmlab/demonstrations/minimap-DEMO/start.sh` for an example of how to do this.
+For minimap, we added it to the list of demos to start by cd’ing to
+`/home/ddmlab/demonstrations/minimap-DEMO/` and running
+
+`sudo su -c ’pm2 start ecosystem.config.js’`
+
+There is one more important step: after adding a demo to the list of those to be started
+at boot time, also call
+
+`sudo su -c ’pm2 save’`
+
+This causes the newly update list of demos to be saved for restart at boot time.
+
+Please do **not** defeat pm2’s efforts to run you demo as `ddmlab` and try to run them
+as root instead. Running a demo as root is simply a disaster waiting to happen.
 
 While everything we write and put on Janus should be cloned from GitHub, this is particularly
 important for demos as they are a shared resource and it is important that others be able
