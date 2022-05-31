@@ -87,7 +87,7 @@ If you want to copy anything out of the backup, have a look at `/backups/`.
 Please do **not** delete or modify anything on that disk, however!
 
 Three important warnings:
-  * The backup only happens once a day. Anything changed or added since that last backup is **not** backed up.
+  * The backup only happens once a day. Anything changed or added since that last backup has **not** yet been backed up.
   * The backup disk is on the desk right above Janus. If Janus is taken out by, say, a flood, fire or theft,
     odds are the backup disk will be, too.
   * It’s all still just computer hardware and software, so things could go wrong with the automated backup
@@ -95,12 +95,6 @@ Three important warnings:
 
 In other words, be careful. If you have really precious data, periodically copy it to multiple other places,
 geographically remote from the DDMLab.
-
-Exploration is afoot on a cloud backup system that will run more continuously, and back things up
-remotely, albeit not as transparently. We probably won’t have a proper understanding of how well
-this system works for at least a few more weeks, but if it seems worthwhile note that it will be
-in addition to the nightly backup described above. This document will be updated once a decision is
-reached on this cloud backup scheme.
 
 ## Web server
 
@@ -125,9 +119,13 @@ to be deployed, or to be run in a fashion requiring massive resources.
 In particular, it is best not to use Janus as the primary repository of your code.
 The principle, defining version of your software should be in the DDMLab GitHub space
 (https://github.com/DDM-Lab), and be cloned to Janus when you are ready to use it there.
-This both ensures a consistent backup of all versions of your work, and simplifies moving
-code between your local machine and Janus to simplify development and minimize the workload
-on Janus.
+This
+  * ensures a consistent backup of all versions of your work,
+  * simplifies moving code between your local machine and Janus to simplify development and
+    minimize the workload on Janus,
+  * facilitates moving your work to other machines if such a need arises,
+  * and simplifies things for others who may need to work with or run your code in the future,
+    possibly even after you have left the lab.
 
 ### Resource intensive simulations
 
