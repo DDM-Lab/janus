@@ -265,7 +265,7 @@ as yourself. So, to start a demo initialized by running `run-demo.sh` in the cur
 For demos using node.js create a configuration file, for example `ecosystem.config.js` describing
 your demo and do, while cd’ed to the appropriate directory,
 
-`sudo su -c ’pm2 start ecosystem.config.js`’
+`sudo su -c ’pm2 start ecosystem.config.js' ddmlab`
 
 For an example of this, see `~ddmlab/demonstrations/gridworld-game-DEMO`
 
