@@ -267,7 +267,7 @@ your demo and do, while cd’ed to the appropriate directory,
 
 `sudo su -c ’pm2 start ecosystem.config.js' ddmlab`
 
-For an example of this, see `~ddmlab/demonstrations/gridworld-game-DEMO`
+For an example of this, see `~ddmlab/demonstrations/gridworld-game-DEMO/`
 
 For Python, you’ll also need activate the appropriate virtual environment. For such permanent applications
 and demos, Miniconda/Anaconda are not really suitable as conda environments are tied to users and require
@@ -288,7 +288,7 @@ at boot time, also call
 
 This causes the newly update list of demos to be saved for restart at boot time.
 
-Please do **not** defeat pm2’s efforts to run you demo as `ddmlab` and try to run them
+Please do **not** defeat pm2’s efforts to run your demo as `ddmlab` and try to run it
 as root instead. Running a demo as root is simply a disaster waiting to happen.
 
 While everything we write and put on Janus should be cloned from GitHub, this is particularly
@@ -301,6 +301,9 @@ accurately documented, probably in a README.
 For more transient experiments please have them running only when actively testing them or collecting
 data with them. Always shut them down again when you are done using them. This both reduces the opportunities
 for malefactors to attach Janus and minimizes any unnecessary drain of Janus’s resources.
+
+And please run them as an ordinary user, likely either as `ddmlab` or as yourself.
+But **never** as root.
 
 ### Shared waiting room
 
