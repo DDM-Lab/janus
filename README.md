@@ -127,6 +127,12 @@ This
   * and simplifies things for others who may need to work with or run your code in the future,
     possibly even after you have left the lab.
 
+Please always include an accurate, complete and up to date README with your code on GitHub.
+Just because you are the only one that needs to install and run it now doesn’t mean someone
+else won’t have to at some indeterminate time in the future, so please ensure they have some
+help in figuring that out. And as your code evolves, be sure to read over your README occasionally,
+and update it when things have changed.
+
 ### Resource intensive simulations
 
 Since Janus is a rather powerful machine we believe that with a little care we can use it for
@@ -255,10 +261,28 @@ have them run as some “user” who will always be here. A good choice is as th
 Note that while you cannot initially login as the user `ddmlab`, you can, when necessary, masquerade
 as that user by doing something like `sudo su ddmlab`.
 
-For a simple example of such a file see `/etc/systemd/system/nodegame.service`.
+For a simple example of such a service file see `/etc/systemd/system/nodegame.service`.
 
 For Python, you’ll also need activate the appropriate virtual environment. For such permanent applications
-and demos, Miniconda/Anaconda are not really su
+and demos, Miniconda/Anaconda are not really suitable as conda environments are tied to users and require
+use from a login shell. For demos and the like it is better to use `venv`. This consideration is less of
+an issue for ordinary experiments where you will be starting and stopping them yourself by hand anyway.
+To write a service file with a virtual environment you will need to encapsulate the activation of the
+environment and subsequent running of the application into a simple shell script.
+See `/etc/systemd/system/minimap-demo.service`
+and `/home/ddmlab/demonstrations/minimap-DEMO/start.sh`
+for an example of how to do this.
+
+While everything we write and put on Janus should be cloned from GitHub, this is particularly
+important for demos as they are a shared resource and it is important that others be able
+to run them, not just you. Similarly, it is important that how to install and run them is
+accurately documented, probably in a README.
+
+### Transient experiments
+
+For more transient experiments please have them running only when actively testing them or collecting
+data with them. Always shut them down again when you are done using them. This both reduces the opportunities
+for malefactors to attach Janus and minimizes any unnecessary drain of Janus’s resources.
 
 ### Shared waiting room
 
@@ -273,16 +297,26 @@ lets us each install locally for our own use exactly the versions of things we w
 stepping on one another. This is particularly important in Python which has a long tradition
 of lots of possibly incompatible versions of things, and is used in the system software.
 
-One popular way of manipulating virtual environments is [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+Two popular ways of manipulating virtual environments are
+[venv](https://docs.python.org/3/library/venv.html)
+and [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
+As noted above, conda is not suitable for use in a systemd service file; there, please
+use venv instead.
 
-Be sure to include a `requirements.txt` file with your code in GitHub, and keep it current
-with whatever versions of various packages you are using. Not only will anyone picking up
-your code in five years thank you, you will thank yourself, too.
+Be sure to include a `requirements.txt` file with your code in GitHub,
+and keep it current with whatever versions of various packages you are
+using. And after creating your `requirements.txt` try installing from
+it in fresh virtual environment as a test that all works as expected;
+it should only take a minute, and can save copious time in the future
+as problems caught early are far easier than those months not
+discovered until months in the future. Not only will anyone picking up
+your code in five years thank you, you will eventually thank yourself,
+too.
 
 If you want to use something like TensorFlow, Jason has a relatively high end NVIDIA graphics card
 (10GB GeForce RTX 3080; note that this is *not* the GeForce RTX 3080 Ti). No supporting software
 for such use is yet installed on Janus. It is reputed to be a bit finicky to get right, but
-should certainly be possible when needed.
+should certainly be possible if needed.
 
 ### PHP
 
@@ -301,8 +335,6 @@ For more details of the PHP installation point a browser at [phpinfo.php](http:/
 The latest (as of 24 March 2022) LTS version of node.js, version 16.14.2, along with npm version 8.5.8 and nodemon 2.0.15, is installed on Janus. This will be upgraded on an irregular basis, though upgrades will be announced on the `janus-users` mailing list. It will almost certainly be upgraded along with the biennial OS upgrade.
 
 If for some reason you need a different version of node.js please discuss it on the `janus-users` mailing list. It appears that, if necessary, technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
-
-TODO maybe discuss npm here
 
 #### nodeGame
 
@@ -352,7 +384,7 @@ See `/srv/shiny-server/shinyibl/` for an example.
 ### SQLite
 
 The version of SQLite 3 current in the OS version is installed (as of 22 March 2022 this is version 3.33.0).
-Note that it must be called as `sqlite3‘, not just `sqlite`, which is obsolete and rarely used.
+Note that it must be called as `sqlite3`, not just `sqlite`, which is obsolete and rarely used.
 This typically lags behind the very latest and greatest available, but is stable and well tested.
 It will typically be upgraded sometime after a new version appears in the OS repositories, and almost
 certainly whenever the OS is upgraded.
