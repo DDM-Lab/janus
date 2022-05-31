@@ -367,6 +367,7 @@ at least for a while, but it would be best to update them. This can be easily do
 line
 
 `module.exports = function(stager, settings) {`
+
 to
 
 `module.exports = function(treatmentName, settings, stager, setup, gameRoom) {`
