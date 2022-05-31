@@ -238,7 +238,7 @@ Some that were open on Halle are not yet open on Janus as it isn’t clear they 
 If any that are open are no longer needed please either close them and update the sheet, or
 let me (dfm) know and I’ll take care of it.
 
-### Applications that should always run
+### Demos and other applications that should always run
 
 Most of our online experiments have relatively short lifetimes, and don’t need to automatically restart
 when Janus is rebooted. In fact, it’s probably best that they don’t in case we forget to stop them
@@ -248,7 +248,17 @@ But some do need to run 7/24, for example permanent demos. For these
 a [systemd](https://www.digitalocean.com/community/tutorials/systemd-essentials-working-with-services-units-and-the-journal)
 service definition file should be created, put into `/etc/systemd/system/`, and enabled.
 
+Please do **not** have such permanent applications run as the `root` user. This is a classic exposure
+to attach from the outside. While less of a problem, it is best that they not run as you, either, as
+they may need to keep running after you’ve left the lab and your account disappears. It is best to
+have them run as some “user” who will always be here. A good choice is as the user `ddmlab`.
+Note that while you cannot initially login as the user `ddmlab`, you can, when necessary, masquerade
+as that user by doing something like `sudo su ddmlab`.
+
 For a simple example of such a file see `/etc/systemd/system/nodegame.service`.
+
+For Python, you’ll also need activate the appropriate virtual environment. For such permanent applications
+and demos, Miniconda/Anaconda are not really su
 
 ### Shared waiting room
 
