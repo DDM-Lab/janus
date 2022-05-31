@@ -364,8 +364,13 @@ Note that if you are installing a nodeGame game written against an earlier versi
 may be some minor changes that are needed. One likely one is that the argument signature to the
 `stager` function has changed. Stefano has arranged that the old functions will continue to work,
 at least for a while, but it would be best to update them. This can be easily done just by changing the
-line `module.exports = function(stager, settings) {`
-to `module.exports = function(treatmentName, settings, stager, setup, gameRoom) {`
+line
+
+`module.exports = function(stager, settings) {`
+to
+
+`module.exports = function(treatmentName, settings, stager, setup, gameRoom) {`
+
 in `game.stages.js`.
 
 ### R
