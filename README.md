@@ -260,12 +260,12 @@ simply by calling `pm2 start` with suitable arguments. However, it is important 
 `pm2` while running as the user `ddmlab`, lest you instead start a new instance of it running
 as yourself. So, to start a demo initialized by running `run-demo.sh` in the current directly, do
 
-`sudo su -c ’pm2 start run-demo.sh’`
+`sudo su -c ’pm2 start run-demo.sh’ ddmlab`
 
 For demos using node.js create a configuration file, for example `ecosystem.config.js` describing
 your demo and do, while cd’ed to the appropriate directory,
 
-`sudo su -c ’pm2 start ecosystem.config.js’`
+`sudo su -c ’pm2 start ecosystem.config.js`’
 
 For an example of this, see `~ddmlab/demonstrations/gridworld-game-DEMO`
 
@@ -279,12 +279,12 @@ See `/home/ddmlab/demonstrations/minimap-DEMO/start.sh` for an example of how to
 For minimap, we added it to the list of demos to start by cd’ing to
 `/home/ddmlab/demonstrations/minimap-DEMO/` and running
 
-`sudo su -c ’pm2 start ecosystem.config.js’`
+`sudo su -c ’pm2 start ecosystem.config.js’ ddmlab`
 
 There is one more important step: after adding a demo to the list of those to be started
 at boot time, also call
 
-`sudo su -c ’pm2 save’`
+`sudo su -c ’pm2 save’ ddmlab`
 
 This causes the newly update list of demos to be saved for restart at boot time.
 
