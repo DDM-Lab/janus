@@ -247,7 +247,7 @@ Some that were open on Halle are not yet open on Janus as it isn’t clear they 
 If any that are open are no longer needed please either close them and update the sheet, or
 let me (dfm) know and I’ll take care of it.
 
-### Demos that should always be running run
+### Demos that should always be running
 
 Most of our online experiments have relatively short lifetimes, and don’t need to automatically restart
 when Janus is rebooted. In fact, it’s probably best that they don’t in case we forget to stop them
