@@ -73,7 +73,7 @@ that may impact others. For example, you might send a message saying something l
 
 And be sure to send that promised followup! And note that, as discussed further below, if you
 are doing something like what is described in this message you should take steps to ensure it
-does not conflict with ongoing on-line experiments run on Jason simultaneously.
+does not conflict with ongoing on-line experiments run on Janus simultaneously.
 
 Two notes on the mailing list:
 * messages to it are archived; this may help in tracking down any problems that arise in the future
@@ -388,7 +388,7 @@ discovered until months in the future. Not only will anyone picking up
 your code in five years thank you, you will eventually thank yourself,
 too.
 
-If you want to use something like TensorFlow, Jason has a relatively high end NVIDIA graphics card
+If you want to use something like TensorFlow, Janus has a relatively high end NVIDIA graphics card
 (10GB GeForce RTX 3080; note that this is *not* the GeForce RTX 3080 Ti). No supporting software
 for such use is yet installed on Janus. It is reputed to be a bit finicky to get right, but
 should certainly be possible if needed.
