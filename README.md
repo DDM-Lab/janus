@@ -260,12 +260,12 @@ simply by calling `pm2 start` with suitable arguments. However, it is important 
 `pm2` while running as the user `ddmlab`, lest you instead start a new instance of it running
 as yourself. So, to start a demo initialized by running `run-demo.sh` in the current directly, do
 
-`sudo su -c ’pm2 start run-demo.sh’ ddmlab`
+    sudo su -c ’pm2 start run-demo.sh’ ddmlab
 
 For demos using node.js create a configuration file, for example `ecosystem.config.js` describing
 your demo and do, while cd’ed to the appropriate directory,
 
-`sudo su -c ’pm2 start ecosystem.config.js' ddmlab`
+    sudo su -c ’pm2 start ecosystem.config.js' ddmlab
 
 For an example of this, see `~ddmlab/demonstrations/gridworld-game-DEMO/`
 
@@ -273,23 +273,70 @@ For Python, you’ll also need activate the appropriate virtual environment. For
 and demos, Miniconda/Anaconda are not really suitable as conda environments are tied to users and require
 use from a login shell. For demos and the like it is better to use `venv`. This consideration is less of
 an issue for ordinary experiments where you will be starting and stopping them yourself by hand anyway.
-To start such a Python bassed demo you will need to encapsulate the activation of the
+To start such a Python based demo you will need to encapsulate the activation of the
 environment and subsequent running of the application into a simple shell script.
 See `/home/ddmlab/demonstrations/minimap-DEMO/start.sh` for an example of how to do this.
 For minimap, we added it to the list of demos to start by cd’ing to
 `/home/ddmlab/demonstrations/minimap-DEMO/` and running
 
-`sudo su -c ’pm2 start ecosystem.config.js’ ddmlab`
+    sudo su -c ’pm2 start start.sh’ ddmlab
+
+To recapitulate and make more concrete the above, when setting up a Python based demo
+to start automatically you’ll usually want to create a venv virtual environment, activate
+it, and ensure all the packages listed in requirements.txt are include with something like
+
+    sudo su ddmlab
+    python3 -m venv .venv
+    source .venv/bin/activaet
+    pip install -r requirements.txt
+
+followed by `^D` to stop being the user ddmlab.
+Note that `.venv` is just a name of your choice.
+Then create a script, say `start.sh` containing something like
+
+    source .venv/bin/activate
+    python run_my_demo.py
+
+that, when run, will activate you virtual environment and then run your demo. You should make this script
+executable
+
+    chmod a+x
+
+and then add it to pm2’s queue of things to start
+
+    sudo su -c ’pm2 start start.sh’ ddmlab
 
 There is one more important step: after adding a demo to the list of those to be started
 at boot time, also call
 
-`sudo su -c ’pm2 save’ ddmlab`
+    sudo su -c ’pm2 save’ ddmlab
 
 This causes the newly updated list of demos to be saved for restart at boot time.
 
 Please do **not** defeat pm2’s efforts to run your demo as `ddmlab` and try to run it
 as root instead. Running a demo as root is simply a disaster waiting to happen.
+
+Normally, unless extra steps are taken, files on Janus will be writable by their author, only, though
+readable by anyone able to login to Janus. While this is sufficient for most demos to be run as ddmlab, since
+most demos should have no need to write any files, it is generally more convenient to make sure anyone
+in the group can write to them, too. The easiest way to do this is to set the files’ and directories’ groups
+to `ddmlab` and ensure they are group writeable. If you are unfamiliar with Linux file permissions there
+are innumerable references on the web, for example
+[this one](https://www.tutorialspoint.com/unix/unix-file-permission.htm).
+You might also want to look at the man pages for `chmod`, `chwon` and `chgrp`
+(for example, do on Janus `man chmod` to learn more about that command).
+Have your files and directories in the `ddmlab` group and group writable also simplifies
+other members of the group updating them, often a useful thing for demos.
+
+A commonly useful pattern for ensuring a directory and all its contents are writable
+by the ‘ddmlab` group is to do the following while cd’ed to that directory:
+
+   chgrp -R ddmlab .
+   chmod -R g+w .
+
+If you are the owner of this directory and all its contents that should work fine. If not,
+you may need to precede these commands with `sudo`, though, as always, it’s best not to
+use root privileges unless you really need to.
 
 While everything we write and put on Janus should be cloned from GitHub, this is particularly
 important for demos as they are a shared resource and it is important that others be able
@@ -304,6 +351,13 @@ for malefactors to attach Janus and minimizes any unnecessary drain of Janus’s
 
 And please run them as an ordinary user, likely either as `ddmlab` or as yourself.
 But **never** as root.
+
+If your files and directories are owned by you and you are running your experiment as yourself
+all should be well. But if you are running it as `ddmlab` you may need to ensure they they have
+the group `ddmlab` and are group writable, as experiments frequently need to write files to
+record participant behavior. See the preceding section for how to do this. And, again, if this
+may be useful if you want to simplify matters for sharing the authorship of code with other
+members of the group.
 
 ### Shared waiting room
 
