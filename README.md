@@ -4,6 +4,11 @@ Janus (`janus.hss.cmu.edu`) is the DDMLab’s new (early 2022) server. It is a 6
 an 8,604 CUDA core graphics card.
 As of early 2022 Janus is running Pop!_OS version 20.04 LTS, which is essentially the same as
 Ubuntu 20.04 LTS. It is expected that the OS version will be upgraded biennially.
+Janus, and the disk to which its nightly backups are written, are on a UPS (Uninterruptible Power Supply);
+while this means Janus can be expected not to go down if there’s a power outage no longer than the duration the UPS’s
+battery can supply its power needs, which should be a couple of hours, it doesn’t mean Janus will be usable during
+a power outage: odds are CMU’s network will be down when the power is out, so there will be no way to
+get at Janus.
 Janus is located in the DDMLab in Porter Hall, though physical access to the machine should rarely be required.
 
 Janus is intended to be used in two, different ways, that to some extent compete with one another:
@@ -59,8 +64,8 @@ on that, rather than those aimed at GUI users of personal Linux machines. You ma
 the more general Unix command line useful rather than the more specific Linux; while there are differences between
 different Unix implementations, the similarities dominate the differences.
 
-If you are new to writing online experiments here is
-[some possibly useful advice](https://github.com/DDM-Lab/janus/blob/main/web-apps.md).
+If you are new to writing online experiments here is some
+[possibly useful, though opinionated, advice](https://github.com/DDM-Lab/janus/blob/main/web-apps.md).
 
 There is a [`janus-users` mailing list](https://lists.andrew.cmu.edu/mailman/listinfo/janus-users),
 to which users and other interested lab members are
