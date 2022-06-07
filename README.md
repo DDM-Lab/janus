@@ -280,11 +280,11 @@ use from a login shell. For demos and the like it is better to use `venv`. This 
 an issue for ordinary experiments where you will be starting and stopping them yourself by hand anyway.
 To start such a Python based demo you will need to encapsulate the activation of the
 environment and subsequent running of the application into a simple shell script.
-See `/home/ddmlab/demonstrations/minimap-DEMO/start.sh` for an example of how to do this.
+See `/home/ddmlab/demonstrations/minimap-DEMO/start-minimap-demo.sh` for an example of how to do this.
 For minimap, we added it to the list of demos to start by cd’ing to
 `/home/ddmlab/demonstrations/minimap-DEMO/` and running
 
-    sudo su -c ’pm2 start start.sh’ ddmlab
+    sudo su -c ’pm2 start start-minimap-demo.sh’ ddmlab
 
 To recapitulate and make more concrete the above, when setting up a Python based demo
 to start automatically you’ll usually want to create a venv virtual environment, activate
@@ -297,7 +297,7 @@ it, and ensure all the packages listed in requirements.txt are include with some
 
 followed by `^D` to stop being the user ddmlab.
 Note that `.venv` is just a name of your choice.
-Then create a script, say `start.sh` containing something like
+Then create a script, say `start-my-demo.sh` containing something like
 
     source .venv/bin/activate
     python run_my_demo.py
@@ -305,11 +305,11 @@ Then create a script, say `start.sh` containing something like
 that, when run, will activate you virtual environment and then run your demo. You should make this script
 executable
 
-    chmod a+x
+    chmod a+x start-my-demo.sh
 
 and then add it to pm2’s queue of things to start
 
-    sudo su -c ’pm2 start start.sh’ ddmlab
+    sudo su -c ’pm2 start start-my-demo.sh’ ddmlab
 
 There is one more important step: after adding a demo to the list of those to be started
 at boot time, also call
