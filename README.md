@@ -103,13 +103,15 @@ geographically remote from the DDMLab.
 
 ## Web server
 
-The lighttpd webserver, version 1.4.55, is installed on Janus, and serves HTTP through port 80.
+The Apache HTTP web server, version 2.4.41, is installed on Janus, and serves HTTP through port 80.
 We do not yet support TLS (transport layer security, aka HTTPS), but may obtain the necessary certificates and serve
 it through port 443 if a need arises. As of right now, there does not appear to be such a need.
 
 For serving simple, static files, simply place them in `/var/www/html/` and ensure they are publicly readable,
 or at least readable by the user `www-data`, though once you’re serving them publicly it is hard to imagine
 why you’d not let them be publicly readable. On the other hand, do **not** make them publicly writable.
+
+CGI scripts can be placed in `/usr/lib/cgi-bin/`. Ensure they are executable.
 
 ## Best practices
 
