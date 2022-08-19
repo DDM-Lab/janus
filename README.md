@@ -294,7 +294,7 @@ it, and ensure all the packages listed in requirements.txt are include with some
 
     sudo su ddmlab
     python3 -m venv .venv
-    source .venv/bin/activaet
+    source .venv/bin/activate
     pip install -r requirements.txt
 
 followed by `^D` to stop being the user ddmlab.
