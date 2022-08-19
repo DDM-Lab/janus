@@ -22,6 +22,7 @@ Port,State,Who,Purpose
 8084,open,Yinuo,CybORG demo
 8970,closed,dfm,moments@cmu (aka moments2)
 8971,open,dfm,dynamic stocks and flows
+8972,open,dfm,RPS experiment
 ,,,
 9140,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
 9141,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
