@@ -2,8 +2,9 @@
 
 Janus (`janus.hss.cmu.edu`) is the DDMLab’s new (early 2022) server. It is a 64 core 256 GB Linux box with
 an 8,604 CUDA core graphics card.
-As of early 2022 Janus is running Pop!_OS version 20.04 LTS, which is essentially the same as
-Ubuntu 20.04 LTS. It is expected that the OS version will be upgraded biennially.
+As of September 2022 Janus is running Pop!_OS version 20.04 LTS, which is essentially the same as
+Ubuntu 20.04 LTS; we expect to update it to Pop!_OS 22.04 LTS (the moral equivalent of Ubuntu 22.04 LTS) by the end
+of 2022. It is expected that in general the OS version will be upgraded biennially.
 Janus, and the disk to which its nightly backups are written, are on a UPS (Uninterruptible Power Supply);
 while this means Janus can be expected not to go down if there’s a power outage no longer than the duration the UPS’s
 battery can supply its power needs, which should be a couple of hours, it doesn’t mean Janus will be usable during
@@ -172,6 +173,14 @@ such Draconian measures.
 Another resource we want to avoid overtaxing is the number of cores. If folks limit their use
 to no more than 56 cores that should leave more than enough available for concurrent users.
 That is, limit yourself to no more than 56 concurrent processes or threads.
+
+This can get a little complicated, though, when things that use, say, numpy in Python. Under the
+hood numpy (and other, similar packages) might use multiple threads without making the user explicitly
+aware of it. If you are running big, long running simulations that use such technology you should
+probably learn how to figure out a bit more of what it’s doing behind the scenes. Google can be
+your friend here; or I (dfm) can try to help, though I’m no expert in such matters. If necessary
+there are ways to tell numpy and its ilk to limit how many threads they use, though it seems
+complicated and will require some time both with Google and experimenting to get it all right.
 
 Also, when running large simulations or other things that do not interact with users please
 start them with `nice`. For example, instead of `python my_big_nasty_simulation.py` simply do
