@@ -363,7 +363,7 @@ accurately documented, probably in a README.
 
 For more transient experiments please have them running only when actively testing them or collecting
 data with them. Always shut them down again when you are done using them. This both reduces the opportunities
-for malefactors to attach Janus and minimizes any unnecessary drain of Janus’s resources.
+for malefactors to attack Janus and minimizes any unnecessary drain of Janus’s resources.
 
 And please run them as an ordinary user, likely either as `ddmlab` or as yourself.
 But **never** as root.
