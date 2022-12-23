@@ -410,10 +410,7 @@ should certainly be possible if needed.
 
 ### PHP
 
-Version 7.4.3 of PHP is installed on Janus, using fast-cgi through the lighttpd web server.
-Updating from this version may prove problematic as it appears PHP
-version 8 and later include several incompatible changes which may break old PHP applications. However,
-at some point we may need to upgrade it. We’ll deal with those problems when we must, but not yet.
+Version 8.1 of PHP is installed on Janus.
 
 To access PHP simply put your PHP files in `/var/www/html` or (usually better) a subdirectory thereof, and ensure
 they have the extension `.php`, and access them in usual way from a web browser through port 80.
