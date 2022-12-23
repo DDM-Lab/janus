@@ -2,9 +2,8 @@
 
 Janus (`janus.hss.cmu.edu`) is the DDMLab’s new (early 2022) server. It is a 64 core 256 GB Linux box with
 an 8,604 CUDA core graphics card.
-As of September 2022 Janus is running Pop!_OS version 20.04 LTS, which is essentially the same as
-Ubuntu 20.04 LTS; we expect to update it to Pop!_OS 22.04 LTS (the moral equivalent of Ubuntu 22.04 LTS) by the end
-of 2022. It is expected that in general the OS version will be upgraded biennially.
+As of September 2022 Janus is running Pop!_OS version 22.04 LTS, which is essentially the same as
+Ubuntu 22.04 LTS. It is expected that in general the OS version will be upgraded biennially.
 Janus, and the disk to which its nightly backups are written, are on a UPS (Uninterruptible Power Supply);
 while this means Janus can be expected not to go down if there’s a power outage no longer than the duration the UPS’s
 battery can supply its power needs, which should be a couple of hours, it doesn’t mean Janus will be usable during
@@ -104,11 +103,11 @@ geographically remote from the DDMLab.
 
 ## Web server
 
-The Apache HTTP web server, version 2.4.41, is installed on Janus, and serves HTTP through port 80.
+The Apache HTTP web server, version 2.4.52, is installed on Janus, and serves HTTP through port 80.
 We do not yet support TLS (transport layer security, aka HTTPS), but may obtain the necessary certificates and serve
 it through port 443 if a need arises. As of right now, there does not appear to be such a need.
 
-For serving simple, static files, simply place them in `/var/www/html/` and ensure they are publicly readable,
+For serving simple, static files, simply place them in `/var/www/html/` and ensure that they are publicly readable,
 or at least readable by the user `www-data`, though once you’re serving them publicly it is hard to imagine
 why you’d not let them be publicly readable. On the other hand, do **not** make them publicly writable.
 
@@ -423,7 +422,7 @@ For more details of the PHP installation point a browser at [phpinfo.php](http:/
 
 ### JavaScript
 
-The latest (as of 24 March 2022) LTS version of node.js, version 16.14.2, along with npm version 8.5.8 and nodemon 2.0.15, is installed on Janus. This will be upgraded on an irregular basis, though upgrades will be announced on the `janus-users` mailing list. It will almost certainly be upgraded along with the biennial OS upgrade.
+The latest (as of 22 December 2022) LTS version of node.js, version 19.3.0, along with npm version 9.2.0 and nodemon 2.0.20, are installed on Janus. These will be upgraded on an irregular basis, though upgrades will be announced on the `janus-users` mailing list. They will almost certainly be upgraded along with the biennial OS upgrade.
 
 If for some reason you need a different version of node.js please discuss it on the `janus-users` mailing list. It appears that, if necessary, technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
 
@@ -467,7 +466,7 @@ in `game.stages.js`.
 
 ### R
 
-R version 3.6.3 is installed. Unless there is a demand it will only be upgraded infrequently.
+R version 4.1.2 is installed. Unless there is a demand it will only be upgraded infrequently.
 
 #### Shiny Server
 
@@ -480,7 +479,7 @@ See `/srv/shiny-server/shinyibl/` for an example.
 
 ### SQLite
 
-The version of SQLite 3 current in the OS version is installed (as of 22 March 2022 this is version 3.33.0).
+The version of SQLite 3 current in the OS version is installed (as of 22 March 2022 this is version 3.37.2).
 Note that it must be called as `sqlite3`, not just `sqlite`, which is obsolete and rarely used.
 This typically lags behind the very latest and greatest available, but is stable and well tested.
 It will typically be upgraded sometime after a new version appears in the OS repositories, and almost
@@ -492,7 +491,7 @@ before installing it and overwriting the existing version.
 ### MySQL
 
 The version of the MariaDB fork of MySQL current in the OS version is
-installed (as of 26 April this is version 10.3.34), with InnoDB as the
+installed (as of 22 December 2022 this is version 10.6.11), with InnoDB as the
 default underlying engine. It will typically be upgraded sometime
 after a new version appears in the OS repositories, and almost
 certainly whenever the OS is upgraded.
