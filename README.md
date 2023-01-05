@@ -248,8 +248,6 @@ You can see what tags there are with `git tag`, with no arguments. You can see i
 
 If you use a GUI or similar interface to Git instead of the command line it almost certainly includes cognates to all of the above, though you’ll have to consult the documentation of that interface for details.
 
-The above information tags is now also in [the Janus doc](https://github.com/DDM-Lab/janus).
-
 ### Ports
 
 We typically run our online experiments out of lots of different
