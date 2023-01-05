@@ -219,6 +219,37 @@ To minimize our exposure, please
   long time, if it was being served out of a dedicated port please close that port in the
   firewall — see the next section for more details on port usage
 
+#### Tagging experiments
+
+When about to run an experiment, please be sure to *tag* that experiment, with a meaningful name, in Git and GitHub, so we can always find, and resurrect if necessary, the code that was used to run our experiments.
+
+To learn about tagging in Git, see [https://git-scm.com/book/en/v2/Git-Basics-Tagging](https://git-scm.com/book/en/v2/Git-Basics-Tagging) and/or [https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag).
+
+There are two principal flavors of tags; the kind we’re talking about here are “annotated” tags. It’s really important for these purposes that we do use the annotated variety as they store a little extra, useful metadata.
+
+So the rough process when you’re about to run an experiment is to ensure you have the exact version of code you’re running committed in your local Git repository, and then do something like
+
+    git tag -a momble-frotz-experiment-single-user-run-2023-01-05 -m 'commit tag for experiment'
+    git push --follow-tags
+
+Note that pushing a commit does not normally push tags, you have to use `--follow-tags` to do that. Also note that `--follow-tags` only pushes annotated tags , which is *a good thing*, as the lightweight kind are really just private bookmarks and normally should not be pushed to GitHub.†
+
+An alternative to `--follow-tags` is to push a specific tag by name, like
+
+    git push origin momble-frotz-experiment-single-user-run-2023-01-05
+
+though this pushes only the tag, and not the underlying commit, so you’ll have to push the code proper separately.
+
+You can configure Git to apply `--follow-tags` by default by setting the `push.followTags` option to true with [`git-config`](https://git-scm.com/docs/git-config). If you do this you can still skip following tags with `git push --no-follow-tags`.
+
+Please be sure to pick meaningful names for your tags, so that someone else searching years in the future for the exact version of the code you used for the experiment today can be readily discovered. It’s probably best to include a date, or at least date range, in tag names for experiments that are run.
+
+You can see what tags there are with `git tag`, with no arguments. You can see information about an annotateed tag with `git show <tag-name>`. You can also view a list of tags in GitHub, right near where you view information about branches.
+
+If you use a GUI or similar interface to Git instead of the command line it almost certainly includes cognates to all of the above, though you’ll have to consult the documentation of that interface for details.
+
+The above information tags is now also in [the Janus doc](https://github.com/DDM-Lab/janus).
+
 ### Ports
 
 We typically run our online experiments out of lots of different
