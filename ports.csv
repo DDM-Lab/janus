@@ -24,7 +24,7 @@ Port,State,Who,Purpose
 8970,closed,dfm,moments@cmu (aka moments2)
 8971,open,dfm,dynamic stocks and flows
 8972,open,dfm,RPS experiment
-8973,closed,dfm,investment game
+8973,open,dfm,investment-single-player game
 ,,,
 9140,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
 9141,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
