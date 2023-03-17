@@ -1,6 +1,7 @@
 #!/usr/bin/bash
 
 echo "Content-Type: text/plain"
+echo ""
 
 tail /var/log/backups.log
 
