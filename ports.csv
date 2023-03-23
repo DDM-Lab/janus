@@ -17,7 +17,9 @@ Port,State,Who,Purpose
 5003,closed,,box game 4
 5700,open,Ngoc,minimap
 5701,open,Ngoc,minimap demo
-5702,open,Ngoc,team minimap demo
+5702,open,Ngoc,team minimap line
+5703,open,Ngoc,team minimap gauge
+5705,open,Ngoc,team minimap text
 8080,open,dfm,nodeGame
 8083,closed,,MAD game
 8084,open,Yinuo,CybORG demo
