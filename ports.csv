@@ -29,6 +29,7 @@ Port,State,Who,Purpose
 8971,open,dfm,dynamic stocks and flows
 8972,open,dfm,RPS experiment
 8973,closed,dfm,investment-single-player game
+8974,open,ErinB/dfm,optimal-stopping-feedback game
 ,,,
 9140,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
 9141,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
