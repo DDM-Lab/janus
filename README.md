@@ -210,7 +210,7 @@ While we are not likely to be an appealing target, if we are not careful we will
 attacked, sooner or later.
 
 To minimize our exposure, please
-* run you experiment code only when needed for testing, data collection or demonstration purposes
+* run your experiment code only when needed for testing, data collection or demonstration purposes
   (demos may well need to run all the time, of course), and shut it down when not being actively
   used;
 * run it as an ordinary user, **never** as root; for experiments your own userid is probably fine,
