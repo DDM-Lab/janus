@@ -35,6 +35,9 @@ Typically folks will access Janus through SSH. For example, a user with username
 ssh gandalf@janus.hss.cmu.edu
 ```
 and then be prompted for a password to finish logging in.
+
+***Important***: Please ***do not*** login to Janus at the console connected to the physical machine. If you do so Janus will think you are using it as a desktop machine, and by default will assume you want to save power and put itself to sleep once you’ve been idle for a little while, and thus make it completely unavailable over the network!
+
 When a new account is created the user will be sent an initial password, typically in a separate, cryptic mail message
 that does not mention the account or server name. This should be changed at the earliest
 convenience. Please be sure to change it to something not easily guessed. Ideally it should be at least eight
