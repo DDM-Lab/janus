@@ -34,7 +34,7 @@ case letter. In a slightly awkward wrinkle, they also should never be interpreta
 example, do *not* use or `deadbeef` `abba1972` as user names.
 
 **Step one**: figure out an initial password. This should be something not guessable, ideally at least eight characters,
-including at least one each of upper case letters, lower case letters, digits, and non-alphanumeric characteers, without
+including at least one each of upper case letters, lower case letters, digits, and non-alphanumeric characters, without
 any long strings of the same character or characters in a clear ascending or descending order.
 
 **Step two**: create their account by doing
@@ -87,7 +87,8 @@ message to the new user, obviously replacing “frodo” by their new user name.
 > home directory there is directory owned by you in ~ddmlab/experiments, also named “frodo”.
 
 **Step eight**: send the new user a second message containing just their initial password. This message
-should ***not*** include the word “password” anywhere in it, as the whole purpose of sending it
+should ***not*** include the word “password” anywhere in it, nor the name Janus, nor the user’s user name,
+as the whole purpose of sending it
 separately is to reduce the risk of someone else learning their initial password before they’ve had
 a chance to change it.
 

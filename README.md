@@ -25,9 +25,11 @@ with `janus.hss.cmu.edu`.
 
 ## User accounts on Janus
 
-Coty would like to limit the number of Lab members who have accounts on Janus, and
-those she would like initially have already been created. But over time folks will
-come and go from the lab and new users will need accounts and old accounts will
+Everyone in the DDMLab, plus perhaps a few “friends of the lab,” will be provided with accounts
+on Janus. But Coty would like to severely limit those with root (aka superuser or sudo) access,
+which as of 17 October 2023 will just be Coty and Don.
+over time folks will
+come and go from the lab and new users will be provided with accounts and old accounts will
 disappear.
 
 Typically folks will access Janus through SSH. For example, a user with username gandalf might login with
@@ -40,8 +42,9 @@ and then be prompted for a password to finish logging in.
 
 When a new account is created the user will be sent an initial password, typically in a separate, cryptic mail message
 that does not mention the account or server name. This should be changed at the earliest
-convenience. Please be sure to change it to something not easily guessed. Ideally it should be at least eight
-characters long and contain all of upper case letters, lower case letters, digits, and non-alphanumeric characters,
+convenience. Please be sure to change it to something not easily guessed. The new password should be at least eight
+characters long and contain at least one each of upper case letters, lower case letters, digits, and non-alphanumeric
+characters, nor any long strings of the same character or characters in ascending or descending order,
 though such a format is not currently enforced. To change your password, after logging in with your current one
 use the `passwd` command on Janus.
 
@@ -50,29 +53,43 @@ that can be used from various platforms if preferred. And setting up `ssh_keys` 
 logging in without having to type a password is recommended as it is generally more secure
 than logging in with a password.
 
-All users are members of the `ddmlab` group which may be useful for easily sharing write access to files
-that might otherwise be difficult to share. In addition, those users who it is anticipated will be working
-on online experiments, as opposed to simulations, are members of the `www-data` group.
+All users are members of the `ddmlab` and `www-data` groups which may be useful for easily sharing write access to files
+that might otherwise be difficult to share.
+
+We normally keep online experiments in the directory `~ddmlab/experiments/`. In addition to their home
+directory each user is provided with a subdirectory of `~ddmlab/experiments/` with the same name as
+their user account, into which they can write. For example, the directory `~ddmlab/experiments/gandalf`
+would be owned by the user `gandalf`. To ensure easy access to old code and so on once you’ve left the group
+please be sure to keep your experiments in this directory. For nodeGame experiments each user also has
+a subdirectory under `~ddmlab/experiments/nodegame/games_available/`,
+*e.g.* `~ddmlab/experiments/nodegame/games_available/gandalf/
+
+Most things you will need to do can be accomplished without root privileges, but for those rare things
+that do require such privileges, *e.g.* restarting nodeGame or opening a port in the firewall, please
+ask one of those with root privileges, currently Coty and Don.
 
 Please do not share login credentials with others. When trouble arises, it really is best if we can
 track who did what to most expeditiously resolve problems. Multiple people masquerading as the same
 user both step on each other’s feet and confuse things.
 
-In addition to current users, there are also archives of former lab members who had accounts on the old
-machine, Halle, but have left the group, in `/home/former-halle-users/`.
-
 If you are new to Unix, there is a wealth of information about it available online. Note that you’ll typically
 be interacting with Janus from the command line, so you may want to focus on tutorials and so on that concentrate
 on that, rather than those aimed at GUI users of personal Linux machines. You may also find searching for
 the more general Unix command line useful rather than the more specific Linux; while there are differences between
-different Unix implementations, the similarities dominate the differences.
+different Unix implementations, the similarities dominate the differences. One reasonable starting place
+is [Canonical’s “The Linux command line for beginners”](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview). However, you’ll need to ignore much of what is in section 3 of this tutorial,
+as it is aimed at someone logging into a Linux machine from its console, and Janus should generally
+only be logged into over SSH.
 
 If you are new to writing online experiments here is some
 [possibly useful, though opinionated, advice](https://github.com/DDM-Lab/janus/blob/main/web-apps.md).
 
-There is a [`janus-users` mailing list](https://lists.andrew.cmu.edu/mailman/listinfo/janus-users),
-to which users and other interested lab members are
-subscribed. Besides announcements of various Janus issues, please also use it to coördinate use of Janus
+In the past we had a Janus users mailing list. Now that everyone will have an account on Janus
+it isn’t clear whether or not such a list makes sense any longer; perhaps the lab members list
+makes more sense, unless there are folks not on that list who will be using Janus. We’ll get that
+figured out soon, so stay tuned.
+
+In any case, please do use mail to coördinate activities
 that may impact others. For example, you might send a message saying something like,
 
 > I’m going to be running a resource intensive simulation for about the next 48 hours, and so it will
@@ -82,11 +99,6 @@ that may impact others. For example, you might send a message saying something l
 And be sure to send that promised followup! And note that, as discussed further below, if you
 are doing something like what is described in this message you should take steps to ensure it
 does not conflict with ongoing on-line experiments run on Janus simultaneously.
-
-Two notes on the mailing list:
-* messages to it are archived; this may help in tracking down any problems that arise in the future
-* folks who do not have accounts on Janus, but are otherwise interested in its use are encouraged
-to subscribe to the list.
 
 ## Backups
 
@@ -216,11 +228,12 @@ To minimize our exposure, please
 * run your experiment code only when needed for testing, data collection or demonstration purposes
   (demos may well need to run all the time, of course), and shut it down when not being actively
   used;
-* run it as an ordinary user, **never** as root; for experiments your own userid is probably fine,
-  but for demos it’s best to use the user `ddmlab`;
+* run it as an ordinary user, typically yourself, but **never** as root;
+  though for demos as opposed to experiments it’s best to use the user `ddmlab`;
 * and when you are no longer running an experiment, or don’t intend to do so again for a very long
-  long time, if it was being served out of a dedicated port please close that port in the
-  firewall — see the next section for more details on port usage
+  long time, if it was being served out of a dedicated port please ensure that port is closed in the
+  firewall, which will require asking someone with root privileges to do so on your behalf  — see the subsequent
+  section on port usage for more details
 
 #### Tagging experiments
 
@@ -279,26 +292,22 @@ To coördinate our use of ports there is in the Janus repo in the DDMLab GitHub 
 [CSV file port usage table](https://github.com/DDM-Lab/janus/blob/main/ports.csv).
 Please “claim” any port you need to use here, and fill out all four fields for each.
 
-When opening ports in the firewall please include a comment stating the purpose of the open port.
-This should be the same as the Purpose column in the above spreadsheet.
+You will need to ask some one with root privileges, currently Coty or Done, to open a port for you
+once you’ve settled on which you will be using.
 
 Open ports are the primary source of vulnerabilities of web servers. When you no longer
-need an open port (which should be in the range 3000 to 8999) please close it
-(that is, delete the `ufw` rule that had allowed access to that port through the firewall),
+need an open port (which should be in the range 3000 to 8999) please ask to have it closed again,
 and update the usage table. If you wish to retain a claim to the port number for
 possible future reuse, please simply change its state from “open” to “closed.”
-
-Note that as of 26 April 2022 most of the port assignments from Halle have been copied to Janus.
-For some it is unclear who is responsible, and in that case the who column has been left blank for now.
-Some that were open on Halle are not yet open on Janus as it isn’t clear they are being used currently.
-If any that are open are no longer needed please either close them and update the sheet, or
-let me (dfm) know and I’ll take care of it.
 
 ### Demos that should always be running
 
 Most of our online experiments have relatively short lifetimes, and don’t need to automatically restart
-when Janus is rebooted. In fact, it’s probably best that they don’t in case we forget to stop them
+when Janus is rebooted. In fact, it’s best that they don’t in case we forget to stop them
 when no longer needed (but please, do remember to stop them!).
+
+Note that the rest of this section on demos describes activities that require root privileges, so can be skipped
+by most readers.
 
 But permanent demos do need to run 7/24 The
 [pm2 process manager](https://pm2.keymetrics.io/) is running on Janus, and using this is
@@ -396,15 +405,28 @@ For more transient experiments please have them running only when actively testi
 data with them. Always shut them down again when you are done using them. This both reduces the opportunities
 for malefactors to attack Janus and minimizes any unnecessary drain of Janus’s resources.
 
-And please run them as an ordinary user, likely either as `ddmlab` or as yourself.
+And please run them as an ordinary user, usually as yourself.
 But **never** as root.
 
-If your files and directories are owned by you and you are running your experiment as yourself
-all should be well. But if you are running it as `ddmlab` you may need to ensure they they have
-the group `ddmlab` and are group writable, as experiments frequently need to write files to
-record participant behavior. See the preceding section for how to do this. And, again, if this
-may be useful if you want to simplify matters for sharing the authorship of code with other
-members of the group.
+Typically your files and directories willowned by you and you are running your experiment as yourself.
+
+Normally a transient experiment will have a shell script able to start it. When you are testing simply running
+that script is probably sufficient. But when you deploy an experiment you may want to ensure that it is not
+stopped when you log out. This is easily done with the [`nohup` command](https://manpages.ubuntu.com/manpages/trusty/man1/nohup.1.html). If the script that starts your experiment is called `run.sh` you can do something like
+
+    nohup ./run.sh &
+
+which will run your experiment in the background, and ignore you logging out. It will print a process id which you
+can use to kill it with the [Unix `kill` command](https://manpages.ubuntu.com/manpages/focal/en/man1/kill.1.html) when
+you are done with it, or if you need to restart it.
+
+If you lose track of the process id you can easily rediscover it using `pgrep -a` with a suitable string to identify it.
+For example, if you are using `flask` you might do something like
+
+    pgrep -a flask
+
+In this case be sure to look at the output carefully and pick the process id corresponding to *your* experiment
+and not someone else’s.
 
 ### Shared waiting room
 
@@ -457,6 +479,9 @@ If for some reason you need a different version of node.js please discuss it on 
 
 #### nodeGame
 
+Note that we have rearranged nodeGame a little since this was first written. Updating this section of this document
+remains a TODO. It will be updated soon.
+
 Version 7.1.0 (the latest stable version as of 24 March 2022) of nodeGame is installed in /home/ddmlab/experiments/, and configured to start when Janus boots, serving nodeGame out of port 8080.
 
 In an effort to keep the world on Janus cleaner and tidier than the mess we had on Halle, please use this installation of nodeGame to serve your nodeGame games, rather than installing many copies of nodeGame, each using a different port. To do so
@@ -506,7 +531,17 @@ So, for example, if your application is in `/srv/shiny-server/mumble/` users get
 like `http://ddmlab.com:3838/mumble/`.
 See `/srv/shiny-server/shinyibl/` for an example.
 
-### SQLite
+### Databases
+
+While many folks instinctively reach for a database when they wish to store data, think long
+and hard about whether you really need one. For the things we do in the DDMLab it is usually
+a heavier hammer than we really need. Simple text files, typically CSV, are often sufficient.
+
+If you decide you really do need a database, it is ***strongly*** recommended that you use SQLite
+in preference to MySQL. It is much easier to deal with, MySQL being quite complicated, and additionally
+running as a separate process, with its own idiosyncratic  permissions system.
+
+#### SQLite
 
 The version of SQLite 3 current in the OS version is installed (as of 22 March 2022 this is version 3.37.2).
 Note that it must be called as `sqlite3`, not just `sqlite`, which is obsolete and rarely used.
@@ -514,10 +549,9 @@ This typically lags behind the very latest and greatest available, but is stable
 It will typically be upgraded sometime after a new version appears in the OS repositories, and almost
 certainly whenever the OS is upgraded.
 
-If for some reason you need a newer version of sqlite3, please discuss it on the `janus-users` mailing list
-before installing it and overwriting the existing version.
+#### MySQL
 
-### MySQL
+If you *really* need MySQL, it is installed. But you will have a *lot* to learn to use it.
 
 The version of the MariaDB fork of MySQL current in the OS version is
 installed (as of 22 December 2022 this is version 10.6.11), with InnoDB as the
@@ -525,15 +559,9 @@ default underlying engine. It will typically be upgraded sometime
 after a new version appears in the OS repositories, and almost
 certainly whenever the OS is upgraded.
 
-Only a few current members of the lab had user accounts in MySQL on Halle, and these have
-been duplicated in MySQL on Janus, with the same permissions. I have also tried to duplicate
-the passwords (which are not in clear text only hashed, so I don’t actually know them), but
-the way user info is configured in recent versions has changed sufficiently from the older
-version on Halle I’m not sure I’ve gotten it right. Please let me (dfm) know if you have any trouble.
-
-All the MySQL databases from Halle have also been copied to Janus. The contents of these databases
-on Janus are what they were on Halle late in the afternoon of 25 April 2022. Any changes to them on
-Halle since then will require updating the corresponding database on Janus. This should not be difficult.
+If you really must use MySQL be sure to back up your database *frequently* by dumping its contents to a text file.
+While MySQL is included in the nightly backup, it is far more difficult to recover things there than from simple files,
+and depending upon the night backup is almost certain to lead to tears.
 
 ## Why the name Janus?
 
