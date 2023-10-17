@@ -59,7 +59,14 @@ so the new user owns it and it is in the `ddmlab` group
     sudo chown frodo ~ddmlab/experiments/frodo
     sudo chgrp ddmlab ~ddmlab/experiments/frodo
 
-**Step five**: allow this user to access Janus over SSH; we do this by creating a file in
+**Step five**: create a subdirectory of `~ddmlab/experiments/nodegame/games_available` for this user, and adjust
+its permissions so the new user owns it and it is in the `ddmlab` group
+
+    sudo mkdir ~ddmlab/experiments/nodegame/games_available/frodo
+    sudo chown frodo ~ddmlab/experiments/nodegame/games_available/frodo
+    sudo chgrp ddmlab ~ddmlab/experiments/nodegame/games_available/frodo
+
+**Step six**: allow this user to access Janus over SSH; we do this by creating a file in
 `/etc/ssh/sshd_config.d/`.
 
     sudo echo 'AllowUsers frodo' > /etc/ssh/sshd_config.d/frodo.conf
@@ -67,11 +74,11 @@ so the new user owns it and it is in the `ddmlab` group
 Note that you need to replace “frodo” in two places in that command, one the content going into
 the file and the other the name of the file.
 
-**Step six**: restart the SSH daemon to make the preceding configuration change take effect
+**Step seven**: restart the SSH daemon to make the preceding configuration change take effect
 
     sudo systemctl restart ssh
 
-**Step seven**: tell the new user their account is now available, by copying the following into a mail
+**Step eight**: tell the new user their account is now available, by copying the following into a mail
 message to the new user, obviously replacing “frodo” by their new user name.
 
 > I’ve created an account on Janus for you, with the username frodo.
@@ -86,7 +93,7 @@ message to the new user, obviously replacing “frodo” by their new user name.
 > Your account is a member of the ddmlab and www-data groups, and, in addition to your normal
 > home directory there is directory owned by you in ~ddmlab/experiments, also named “frodo”.
 
-**Step eight**: send the new user a second message containing just their initial password. This message
+**Step nine**: send the new user a second message containing just their initial password. This message
 should ***not*** include the word “password” anywhere in it, nor the name Janus, nor the user’s user name,
 as the whole purpose of sending it
 separately is to reduce the risk of someone else learning their initial password before they’ve had
