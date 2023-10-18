@@ -62,7 +62,8 @@ their user account, into which they can write. For example, the directory `~ddml
 would be owned by the user `gandalf`. To ensure easy access to old code and so on once you’ve left the group
 please be sure to keep your experiments in this directory. For nodeGame experiments each user also has
 a subdirectory under `~ddmlab/experiments/nodegame/games_available/`,
-*e.g.* `~ddmlab/experiments/nodegame/games_available/gandalf/
+*e.g.* `~ddmlab/experiments/nodegame/games_available/gandalf/`. Note that `~ddmlab` is just a shorthand
+way of writing `/home/ddmlab`.
 
 Most things you will need to do can be accomplished without root privileges, but for those rare things
 that do require such privileges, *e.g.* restarting nodeGame or opening a port in the firewall, please
@@ -81,11 +82,25 @@ is [Canonical’s “The Linux command line for beginners”](https://ubuntu.com
 as it is aimed at someone logging into a Linux machine from its console, and Janus should generally
 only be logged into over SSH.
 
+One important thing you’ll want to do frequently is move files onto and off of Janus. There are various ways
+this can be accomplished, but probably the easiest is [scp](https://manpages.ubuntu.com/manpages/trusty/en/man1/scp.1.html),
+a command that works much like the `cp` command for copying files, but works between machines by using SSH
+as a transport mechanism. So, for example, if your user name is `gandalf` and you have a file called
+`data.zip` in `~ddmlab/experiments/gandalf` you could move it to your current directory on you local
+machine by running on your local machine the command
+
+    scp gandalf@janus.hss.cmu.edu:/home/experiments/gandlaf/data.zip ./
+
+Note that in this command you typically can’s use the `~ddmlab` shortcut and need to spell out `/home/ddmlab`; also
+this works on macOS or Linux, but I’ve no idea what the cognate incantation would be in Windows, though there must
+be something similar. There are also
+undoubtedly GUI implementations of `scp` if you prefer such, though again I know nothing about them.
+
 If you are new to writing online experiments here is some
 [possibly useful, though opinionated, advice](https://github.com/DDM-Lab/janus/blob/main/web-apps.md).
 
 In the past we had a Janus users mailing list. Now that everyone will have an account on Janus
-it isn’t clear whether or not such a list makes sense any longer; perhaps the lab members list
+it isn’t clear whether or not such a separate list makes sense any longer; perhaps the lab members list
 makes more sense, unless there are folks not on that list who will be using Janus. We’ll get that
 figured out soon, so stay tuned.
 
