@@ -28,7 +28,7 @@ with `janus.hss.cmu.edu`.
 Everyone in the DDMLab, plus perhaps a few “friends of the lab,” will be provided with accounts
 on Janus. But Coty would like to severely limit those with root (aka superuser or sudo) access,
 which as of 17 October 2023 will just be Coty and Don.
-over time folks will
+Over time folks will
 come and go from the lab and new users will be provided with accounts and old accounts will
 disappear.
 
@@ -89,7 +89,7 @@ as a transport mechanism. So, for example, if your user name is `gandalf` and yo
 `data.zip` in `~ddmlab/experiments/gandalf` you could move it to your current directory on you local
 machine by running on your local machine the command
 
-    scp gandalf@janus.hss.cmu.edu:/home/experiments/gandlaf/data.zip ./
+    scp gandalf@janus.hss.cmu.edu:/home/experiments/gandalf/data.zip ./
 
 Note that in this command you typically can’s use the `~ddmlab` shortcut and need to spell out `/home/ddmlab`; also
 this works on macOS or Linux, but I’ve no idea what the cognate incantation would be in Windows, though there must
