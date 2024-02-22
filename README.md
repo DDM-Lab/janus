@@ -296,7 +296,8 @@ Please choose your ports as follows:
   and requires extra care and discussion.
 * For now, please do not use ports greater than 1024 but less than 3000.
 * When exposing experiments to the cruel, outside world please use ports numbered
-  3000 or greater, but less than 9000.
+  3000 or greater, but less than 9000. When opening such ports open them only for TCP or UDP,
+  whichever you need; please do not open them for both unless you really need both.
 * When using ports for internal interprocess communication please use ports numbered
   9000 or greater but less than 10000.
 * Please do not use ports numbered 10000 or greater.
