@@ -100,9 +100,7 @@ If you are new to writing online experiments here is some
 [possibly useful, though opinionated, advice](https://github.com/DDM-Lab/janus/blob/main/web-apps.md).
 
 In the past we had a Janus users mailing list. Now that everyone will have an account on Janus
-it isn’t clear whether or not such a separate list makes sense any longer; perhaps the lab members list
-makes more sense, unless there are folks not on that list who will be using Janus. We’ll get that
-figured out soon, so stay tuned.
+it would be better to use the `DDMLab-members` mailing list instead.
 
 In any case, please do use mail to coördinate activities
 that may impact others. For example, you might send a message saying something like,
@@ -226,7 +224,7 @@ One other important consideration when running resource intensive applications o
 that arises when two people do so simultaneously. For example, if two folks are each using 180 GB of memory
 with 48 processes, we’ve got a problem; instead one of you should run first, and then the other when
 the first has finished. When you expect to be using lots of resources please coördinate
-with others using the `janus-users` mailing list. And remember it is as important to say “I’m done using most
+with others using the `DDMLab-members` mailing list. And remember it is as important to say “I’m done using most
 of Janus now” as it was to say “I’ve debugged by simulation running in one process and I’m about to start
 it up using 56 of them, and so coming close to saturating the machine.”
 
@@ -293,9 +291,9 @@ Please choose your ports as follows:
 * Ports numbered 1024 and lower are special and should not be used, other than
   for their designated, well known applications such as SSH, HTTP and HTTPS.
   Please do not open any ports in this range without discussing it on the
-  mailing list. Note also that applications using ports in this range must
+  `DDMLab-members` mailing list. Note also that applications using ports in this range must
   be run, or at least started, as root, which is yet a further security complication,
-  and requires extra care and discusson.
+  and requires extra care and discussion.
 * For now, please do not use ports greater than 1024 but less than 3000.
 * When exposing experiments to the cruel, outside world please use ports numbered
   3000 or greater, but less than 9000.
@@ -307,7 +305,7 @@ To coördinate our use of ports there is in the Janus repo in the DDMLab GitHub 
 [CSV file port usage table](https://github.com/DDM-Lab/janus/blob/main/ports.csv).
 Please “claim” any port you need to use here, and fill out all four fields for each.
 
-You will need to ask some one with root privileges, currently Coty or Done, to open a port for you
+You will need to ask some one with root privileges, currently Coty or Don, to open a port for you
 once you’ve settled on which you will be using.
 
 Open ports are the primary source of vulnerabilities of web servers. When you no longer
@@ -488,9 +486,9 @@ For more details of the PHP installation point a browser at [phpinfo.php](http:/
 
 ### JavaScript
 
-The latest (as of 22 December 2022) LTS version of node.js, version 19.3.0, along with npm version 9.2.0 and nodemon 2.0.20, are installed on Janus. These will be upgraded on an irregular basis, though upgrades will be announced on the `janus-users` mailing list. They will almost certainly be upgraded along with the biennial OS upgrade.
+The latest (as of 22 December 2022) LTS version of node.js, version 19.3.0, along with npm version 9.2.0 and nodemon 2.0.20, are installed on Janus. These will be upgraded on an irregular basis, though upgrades will be announced on the `DDMLab-members` mailing list. They will almost certainly be upgraded along with the biennial OS upgrade.
 
-If for some reason you need a different version of node.js please discuss it on the `janus-users` mailing list. It appears that, if necessary, technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
+If for some reason you need a different version of node.js please discuss it on the `DDMLab-members` mailing list. It appears that, if necessary, technologies exist so that multiple versions of node.js can peacefully cohabit one machine, though they seem awkward to install and configure.
 
 #### nodeGame
 
@@ -509,7 +507,7 @@ In an effort to keep the world on Janus cleaner and tidier than the mess we had 
 `chmod -R g+w /home/ddmlab/experiments/nodegame/games_available/<your-game's-name>/data`
 * create in `/home/ddmlab/experiments/nodegame/games/` a symbolic link to your game; this can be done with
 `cd /home/ddmlab/experiments/nodegame/games/ ; ln -s ../games_available/<your-game's-name> ./`
-* ensure, probably by using the `janus-users` mailing list, that nodeGame coming down will not impact anyone else,
+* ensure, probably by using the `DDMLab-members` mailing list, that nodeGame coming down will not impact anyone else,
 and then restart nodeGame with `sudo systemctl restart nodegame`
 
 See the existing links in `…/nodegame/games/` for examples.
