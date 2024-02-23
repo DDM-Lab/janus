@@ -11,26 +11,17 @@ Port,State,Who,Purpose
 3006,open,Ngoc,onestep gridworld demo
 3838,open,dfm / Erin B,shiny-server
 3839,closed,dfm,web-pyibl
-5000,closed,,box game
-5001,closed,,box game 2
-5002,closed,,box game 3
-5003,closed,,box game 4
-5700,open,Ngoc,minimap
 5701,open,Ngoc,minimap demo
 5702,open,Chase,overcooked human-bot
 5703,open,Chase,overcooked human-ai
 5705,open,Chase,slime volleyball human-ai
 5885,closed,Maria,binary choice observability outcomes experiment
 8080,open,dfm,nodeGame
-8083,closed,,MAD game
 8084,open,Yinuo,CybORG demo
-8085,open,Yinuo,CybORG CybORG-TDG
-8888,open,Tyler,Contextual bandit
 8970,closed,dfm,moments@cmu (aka moments2)
-8971,open,dfm,dynamic stocks and flows
-8972,open,dfm,RPS experiment
-8973,open,dfm,investment-single-player game
-8974,closed,ErinB/dfm,optimal-stopping-feedback game
+8971,closed,dfm,dynamic stocks and flows
+8972,open,dfm,RPS demo
+8974,closed,ErinB,optimal-stopping-feedback game
 8975,open,ErinB,optimal-stopping-length game
 ,,,
 9140,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
