@@ -14,7 +14,7 @@ Port,State,Who,Purpose
 5701,open,Ngoc,minimap demo
 5702,open,Chase,overcooked human-bot
 5703,open,Chase,overcooked human-ai
-5704,open,Chase,volleyball human-human
+5704,open,Chase,volleyball 'human-human
 5705,open,Chase,slime volleyball human-ai
 5885,closed,Maria,binary choice observability outcomes experiment
 8080,open,dfm,nodeGame
@@ -23,7 +23,7 @@ Port,State,Who,Purpose
 8971,closed,dfm,dynamic stocks and flows
 8972,open,dfm,RPS demo
 8974,closed,ErinB,optimal-stopping-feedback game
-8975,open,ErinB,optimal-stopping-length game
+8975,closed,ErinB,optimal-stopping-length game
 ,,,
 9140,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
 9141,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
