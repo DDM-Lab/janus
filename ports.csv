@@ -9,14 +9,21 @@ Port,State,Who,Purpose
 3004,open,Ngoc,gridworld for Coty's class
 3005,open,Ngoc,minimap for Coty's class
 3006,open,Ngoc,onestep gridworld demo
+3389,blocked,,do not use, blocked by CMU network
 3838,open,dfm / Erin B,shiny-server
 3839,closed,dfm,web-pyibl
+5555,blocked,,do not use, blocked by CMU network
 5701,open,Ngoc,minimap demo
 5702,open,Chase,overcooked human-bot
 5703,open,Chase,overcooked human-ai
 5704,open,Chase,volleyball 'human-human
 5705,open,Chase,slime volleyball human-ai
 5885,open,Maria,binary choice observability outcomes experiment
+5900,blocked,,do not use, blocked by CMU network
+5901,blocked,,do not use, blocked by CMU network
+5902,blocked,,do not use, blocked by CMU network
+5903,blocked,,do not use, blocked by CMU network
+6050,blocked,,do not use, blocked by CMU network
 8080,open,dfm,nodeGame
 8084,open,Yinuo,CybORG demo
 8961,open,Roderick,multi-attribute human-ai coordination
