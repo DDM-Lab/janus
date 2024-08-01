@@ -40,6 +40,10 @@ and then be prompted for a password to finish logging in.
 
 ***Important***: Please ***do not*** login to Janus at the console connected to the physical machine. If you do so Janus will think you are using it as a desktop machine, and by default will assume you want to save power and put itself to sleep once you’ve been idle for a little while, and thus make it completely unavailable over the network!
 
+If you want to use the GPU on Janus’s graphics card to speed up highly parallelizable, linear computations you may, or may not, need to access Janus through its console, depending
+upon details of the software you are using. If you think you do need to do this please discuss it with Don first so we can make sure it is done in such a way that it does not
+disrupt Janus for other users.
+
 When a new account is created the user will be sent an initial password, typically in a separate, cryptic mail message
 that does not mention the account or server name. This should be changed at the earliest
 convenience. Please be sure to change it to something not easily guessed. The new password should be at least eight
@@ -167,6 +171,210 @@ Just because you are the only one that needs to install and run it now doesn’t
 else won’t have to at some indeterminate time in the future, so please ensure they have some
 help in figuring that out. And as your code evolves, be sure to read over your README occasionally,
 and update it when things have changed.
+
+For an example of a good README, see [the investment single player README](https://github.com/DDM-Lab/investment-single-player/blob/main/README.md);
+though the description of the code in this file may be a bit more detailed that will always be practical, it seems something good to aim at.
+
+***Note***: as of an audit in late July 2004 nearly *half*, 49%, of the repositories in the DDMLab
+GitHub space lack a README entirely, contain an empty README, or contain a semantically vacuous README.
+The goal of keeping things in GitHub is to facilitate their reuse, possibly long after the author
+has left the lab; it is not simply to tick a box that says “it’s in GitHub.”
+
+### A note on coy and paste coding
+
+Many, probably most, of the things we create in the DDMLab, both online experiments and models, are
+intended to work across two or more similar, but slightly different, conditions. This unfortunately
+tempts folks to code in a fashion that discourages reuse and encourages errors: the temptation is to write it once for one condition,
+than just make a complete verbatim copy of that and change a few constants or lines of code. This results in code
+that is not only two or several fold longer than necessary, in addition it makes it difficult for a reader to
+understand how seemingly identical large blocks of code differ, where changes need to be made, and, worst of all,
+requires any changes to be made multiple times. This doesn’t just make life difficult for those who come
+after you, it makes life difficult for you, yourself, if you need to update or change things in six months.
+
+Instead, aim at writing such things once, perhaps as a function or similar abstraction, with the different conditions
+as parameters or other small, easily changed and isolated pieces of data. For example, imagine writing a simple
+PyIBL model to perform a safe/risky binary choice task with three different risky payoffs and corresponding
+probabilities. Don’t write something like this
+
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from pyibl import Agent
+    from random import random
+
+    results = []
+    high_probability = 3 / 4
+    for participant in range(100):
+        agent = Agent(default_utility=(1.2 * 4))
+        round_results = [None] * 60
+        for round in range(60):
+            choice = agent.choose(["safe", "risky"])
+            if choice == "safe":
+                payoff = 3
+            elif random() < high_probability:
+                payoff = 4
+            else:
+                payoff = 0
+            agent.respond(payoff)
+            round_results[round] = int(choice == "risky")
+        results.append(round_results)
+    plt.plot(range(1, 61),
+             np.mean(np.asarray(results), axis=0),
+             label=f"risky high payoff = 4 points")
+
+    results = []
+    high_probability = 3 / 6
+    for participant in range(100):
+        agent = Agent(default_utility=(1.2 * 4))
+        round_results = [None] * 60
+        for round in range(60):
+            choice = agent.choose(["safe", "risky"])
+            if choice == "safe":
+                payoff = 3
+            elif random() < high_probability:
+                payoff = 6
+            else:
+                payoff = 0
+            agent.respond(payoff)
+            round_results[round] = int(choice == "risky")
+        results.append(round_results)
+    plt.plot(range(1, 61),
+             np.mean(np.asarray(results), axis=0),
+             label=f"risky high payoff = 4 points")
+
+    results = []
+    high_probability = 3 / 12
+    for participant in range(100):
+        agent = Agent(default_utility=(1.2 * 4))
+        round_results = [None] * 60
+        for round in range(60):
+            choice = agent.choose(["safe", "risky"])
+            if choice == "safe":
+                payoff = 3
+            elif random() < high_probability:
+                payoff = 12
+            else:
+                payoff = 0
+            agent.respond(payoff)
+            round_results[round] = int(choice == "risky")
+        results.append(round_results)
+    plt.plot(range(1, 61),
+             np.mean(np.asarray(results), axis=0),
+             label=f"risky high payoff = 4 points")
+
+    plt.ylim([0, 1])
+    plt.ylabel("fraction choosing risky")
+    plt.xlabel("round")
+    plt.legend()
+    plt.title(f"Safe (3 points) versus risky, 100 participants")
+    plt.savefig("binary-choice.png")
+
+Instead, write something like this
+
+    import matplotlib.pyplot as plt
+    import numpy as np
+    from pyibl import Agent
+    from random import random
+
+    HIGH_PAYOUTS = [4, 6, 12]
+    SAFE_PAYOUT = 3
+    PLOT_FILE = "binary-choice.png"
+    ROUNDS = 60
+    PARTICIPANTS = 100
+    PREPOPULATED_MULTIPLIER = 1.2
+
+    def run_condition(high_payout):
+        results = []
+        high_probability = SAFE_PAYOUT / high_payout
+        for participant in range(PARTICIPANTS):
+            agent = Agent(default_utility=(PREPOPULATED_MULTIPLIER * high_payout))
+            round_results = [None] * ROUNDS
+            for round in range(ROUNDS):
+                choice = agent.choose(["safe", "risky"])
+                if choice == "safe":
+                    payoff = SAFE_PAYOUT
+                elif random() < high_probability:
+                    payoff = high_payout
+                else:
+                    payoff = 0
+                agent.respond(payoff)
+                round_results[round] = int(choice == "risky")
+            results.append(round_results)
+        return results
+
+    for payout in HIGH_PAYOUTS:
+        plt.plot(range(1, ROUNDS + 1),
+                 np.mean(np.asarray(run_condition(payout)), axis=0),
+                 label=f"risky high payoff = {payout} points")
+    plt.ylim([0, 1])
+    plt.ylabel("fraction choosing risky")
+    plt.xlabel("round")
+    plt.legend()
+    plt.title(f"Safe ({SAFE_PAYOUT} points) versus risky, {PARTICIPANTS:,} participants")
+    plt.savefig(PLOT_FILE)
+
+(Yes, there are many other ways the “good” example could be further improved; the point here is just to avoid copy and paste programming,
+no matter how tempting it is with similar conditions. Those who come after you will thank you, and you will thank yourself
+if you come after yourself in six months.)
+
+### A note for Python users
+
+When adding a Python project to the DDMLab GitHub space it should almost always include a `requirements.txt` file. When doing this it is tempting to
+just do `pip freeze > requirements.txt`. While that does capture what you have been using, in the long term it is likely to cause trouble. A bit more
+thought and care will make life much easier for those who come after you. While doing `pip freeze` is a fine first step, there are at least two problems
+with leaving it at that:
+
+The first problem is that it captures *everything* in your current Python environment. Often folks developing code install a *lot* more packages than are actually needed by the
+end product.
+For example, it might include various plotting and data analysis packages you routinely use, but that are not needed by the code you are capturing in GitHub. Or, if you use
+one environment for most of your work, it can include things only used in completely different projects. And if you’ve been working on this for a while, it may include
+far older versions of packages where the most recent ones work fine, or even better
+
+Far better is, when your work on a piece of code is stable, to create a *fresh, new* virtual environment, activate it, and install just what you think you need into it.
+Then do the `pip freeze` with that to capture just what you need, and the latest versions that work with your code.
+
+The second problem is that it captures everything, *including* the versions of indirect dependencies. This is unfortunate. If you are not yourself using
+an indirect dependency, it is really the package that depends upon that indirect dependency that should be expressing an option on what version it needs.
+Locking it in makes life much more difficult for those who come after and may want to upgrade one of the direct dependencies of your code.
+
+For example, imagine you are making a simple PyIBL model, and the only package you install is PyIBL. When you do `pip freeze` you will get
+
+    contourpy==1.2.1
+    cycler==0.12.1
+    fonttools==4.53.1
+    kiwisolver==1.4.5
+    matplotlib==3.9.1
+    numpy==2.0.1
+    ordered-set==4.1.0
+    packaging==24.1
+    pandas==2.2.2
+    pillow==10.4.0
+    prettytable==3.10.2
+    pyactup==2.2.3
+    pyibl==5.1.5
+    pylru==1.2.1
+    pyparsing==3.1.2
+    python-dateutil==2.9.0.post0
+    pytz==2024.1
+    six==1.16.0
+    tzdata==2024.1
+    wcwidth==0.2.13
+
+Now, imagine two years from now someone needs to reuse this code, and wants to upgrade it from PyIBL version 6.
+When they look at the `requirement.txt` file they will have no idea which of these many packages your
+model is using, and which versions it is depending upon. In simple cases they can upgrade everything to the
+latest and greatest, but as things become more complex, particular for code that may have an unusual dependency,
+it can become difficult to see what is actually needed. Far better if the `requirements.txt` file simply contained
+
+    pyibl==5.1.5
+
+This is, in fact, *all* that is needed to run the model, since all those other dependencies are indirect ones simply
+required by PyIBL and it is far better for PyIBL to say what it needs. Indeed, for all we know, whenever PyIBL version 6
+is available is may in turn use a newer version of PyACTUp which in turn may no longer need `prettytable` or `pylru`. For
+better if the `requirments.txt` cites only what is actually needed and lets Python’s installation software handle
+the indirect dependencies.
+
+So, best practice, is to reduce your `requirmnets.txt` file to just the packages you actually need. In this case,
+just PyIBL.
 
 ### Resource intensive simulations
 
