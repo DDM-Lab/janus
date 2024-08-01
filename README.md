@@ -180,7 +180,7 @@ GitHub space lack a README entirely, contain an empty README, or contain a seman
 The goal of keeping things in GitHub is to facilitate their reuse, possibly long after the author
 has left the lab; it is not simply to tick a box that says “it’s in GitHub.”
 
-### A note on coy and paste coding
+### A note on copy and paste coding
 
 Many, probably most, of the things we create in the DDMLab, both online experiments and models, are
 intended to work across two or more similar, but slightly different, conditions. This unfortunately
@@ -359,21 +359,21 @@ For example, imagine you are making a simple PyIBL model, and the only package y
     tzdata==2024.1
     wcwidth==0.2.13
 
-Now, imagine two years from now someone needs to reuse this code, and wants to upgrade it from PyIBL version 6.
+Now, imagine two years from now someone needs to reuse this code, and wants to upgrade it to PyIBL version 6.
 When they look at the `requirement.txt` file they will have no idea which of these many packages your
 model is using, and which versions it is depending upon. In simple cases they can upgrade everything to the
-latest and greatest, but as things become more complex, particular for code that may have an unusual dependency,
+latest and greatest, but as things become more complex, particularly for code that may have an unusual, further dependency,
 it can become difficult to see what is actually needed. Far better if the `requirements.txt` file simply contained
 
     pyibl==5.1.5
 
 This is, in fact, *all* that is needed to run the model, since all those other dependencies are indirect ones simply
 required by PyIBL and it is far better for PyIBL to say what it needs. Indeed, for all we know, whenever PyIBL version 6
-is available is may in turn use a newer version of PyACTUp which in turn may no longer need `prettytable` or `pylru`. For
-better if the `requirments.txt` cites only what is actually needed and lets Python’s installation software handle
+is available is may in turn use a newer version of PyACTUp which in turn may no longer need `prettytable` or `pylru`. Far
+better if the `requirments.txt` file cites only what is actually needed and lets Python’s installation software handle
 the indirect dependencies.
 
-So, best practice, is to reduce your `requirmnets.txt` file to just the packages you actually need. In this case,
+So, best practice, is to reduce your `requiremnets.txt` file to just the packages *you* actually need. In this case,
 just PyIBL.
 
 ### Resource intensive simulations
