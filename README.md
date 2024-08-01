@@ -370,7 +370,7 @@ it can become difficult to see what is actually needed. Far better if the `requi
 This is, in fact, *all* that is needed to run the model, since all those other dependencies are indirect ones simply
 required by PyIBL and it is far better for PyIBL to say what it needs. Indeed, for all we know, whenever PyIBL version 6
 is available is may in turn use a newer version of PyACTUp which in turn may no longer need `prettytable` or `pylru`. Far
-better if the `requirments.txt` file cites only what is actually needed and lets Python’s installation software handle
+better if the `requirements.txt` file cites only what is actually needed and lets Python’s installation software handle
 the indirect dependencies.
 
 So, best practice, is to reduce your `requiremnets.txt` file to just the packages *you* actually need. In this case,
