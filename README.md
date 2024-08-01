@@ -145,7 +145,7 @@ why you’d not let them be publicly readable. On the other hand, do **not** mak
 
 CGI scripts can be placed in `/usr/lib/cgi-bin/`. Ensure they are executable.
 
-## Best practices
+## [Best practices](#best-practices)
 
 Always bear in mind that Janus is a shared resource, both shared between multiple lab members and
 shared between the use cases of online experiments and big simulations.
