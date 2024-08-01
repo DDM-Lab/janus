@@ -178,7 +178,9 @@ though the description of the code in this file may be a bit more detailed that 
 ***Note***: as of an audit in late July 2004 nearly *half*, 49%, of the repositories in the DDMLab
 GitHub space lack a README entirely, contain an empty README, or contain a semantically vacuous README.
 The goal of keeping things in GitHub is to facilitate their reuse, possibly long after the author
-has left the lab; it is not simply to tick a box that says “it’s in GitHub.”
+has left the lab; it is not simply to tick a box that says “it’s in GitHub.” For very old code
+it may be too late to add much information as it is long forgotten, but for new things being
+added please *always* include a *useful* README.
 
 ### A note on copy and paste coding
 
