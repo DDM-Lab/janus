@@ -33,6 +33,7 @@ Port,State,Who,Purpose
 8972,open,dfm,RPS demo
 8974,closed,ErinB,optimal-stopping-feedback game
 8975,closed,ErinB,optimal-stopping-length game
+8976,open,ErinB,optimal-stopping-thresholds game
 ,,,
 9140,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
 9141,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
