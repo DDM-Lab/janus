@@ -36,6 +36,8 @@ Port,State,Who,Purpose
 8976,open,ErinB,optimal-stopping-thresholds game
 8977,open,ErinB,optimal-stopping-length-variability game
 8978,open,ErinB,optimal-stopping-length-visibility game
+8979,open,ErinB,optimal-stopping-recommendations game
+8980,open,ErinB,optimal-stopping-demo demo
 ,,,
 9140,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
 9141,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
