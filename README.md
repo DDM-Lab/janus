@@ -635,7 +635,7 @@ for malefactors to attack Janus and minimizes any unnecessary drain of Janus’s
 And please run them as an ordinary user, usually as yourself.
 But **never** as root.
 
-Typically your files and directories willowned by you and you are running your experiment as yourself.
+Typically your files and directories will be owned by you when you are running your experiment as yourself.
 
 Normally a transient experiment will have a shell script able to start it. When you are testing simply running
 that script is probably sufficient. But when you deploy an experiment you may want to ensure that it is not
