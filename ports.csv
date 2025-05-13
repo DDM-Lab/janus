@@ -25,7 +25,6 @@ Port,State,Who,Purpose
 5902,blocked,,do not use—blocked by CMU network
 5903,blocked,,do not use—blocked by CMU network
 6050,blocked,,do not use—blocked by CMU network
-8000,open,dfm,WebPyIBL demo
 8080,open,dfm,nodeGame
 8084,open,Yinuo,CybORG demo
 8961,open,Roderick,multi-attribute human-ai coordination
@@ -40,6 +39,7 @@ Port,State,Who,Purpose
 8979,open,ErinB,optimal-stopping-recommendations game
 8980,open,ErinB,optimal-stopping-demo demo
 8981,open,tyler,foundation-phishing demo
+8997,open,dfm,WebPyIBL demo
 ,,,
 9140,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
 9141,internal,Drew,Lisp ↔ PHP communication in adaptive phishing game
