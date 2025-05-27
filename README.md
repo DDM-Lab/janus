@@ -95,7 +95,7 @@ machine by running on your local machine the command
 
     scp gandalf@janus.hss.cmu.edu:/home/experiments/gandalf/data.zip ./
 
-Note that in this command you typically can’s use the `~ddmlab` shortcut and need to spell out `/home/ddmlab`; also
+Note that in this command you typically can’t use the `~ddmlab` shortcut and need to spell out `/home/ddmlab`; also
 this works on macOS or Linux, but I’ve no idea what the cognate incantation would be in Windows, though there must
 be something similar. There are also
 undoubtedly GUI implementations of `scp` if you prefer such, though again I know nothing about them.
@@ -175,7 +175,7 @@ and update it when things have changed.
 For an example of a good README, see [the investment single player README](https://github.com/DDM-Lab/investment-single-player/blob/main/README.md);
 though the description of the code in this file may be a bit more detailed that will always be practical, it seems something good to aim at.
 
-***Note***: as of an audit in late July 2004 nearly *half*, 49%, of the repositories in the DDMLab
+***Note***: as of an audit in late July 2024 nearly *half*, 49%, of the repositories in the DDMLab
 GitHub space lack a README entirely, contain an empty README, or contain a semantically vacuous README.
 The goal of keeping things in GitHub is to facilitate their reuse, possibly long after the author
 has left the lab; it is not simply to tick a box that says “it’s in GitHub.” For very old code
