@@ -541,7 +541,7 @@ But permanent demos do need to run 7/24 The
 usually the simplest way to accomplish this. New demos can be added to those started by `pm2`
 simply by calling `pm2 start` with suitable arguments. However, it is important to only call
 `pm2` while running as the user `ddmlab`, lest you instead start a new instance of it running
-as yourself. So, to start a demo initialized by running `run-demo.sh` in the current directly, do
+as yourself. So, to start a demo initialized by running `run-demo.sh` in the current directory, do
 
     sudo su -c ’pm2 start run-demo.sh’ ddmlab
 
