@@ -1,6 +1,6 @@
 Port,State,Who,Purpose
 22,open,dfm,ssh
-23,open only to two IP addresses,dfm,telnet (DO NOTallow general access as it is insecure)
+23,open only to two IP addresses,dfm,telnet (DO NOT allow general access as it is insecure)
 80,open,dfm,http
 443,open,dfm,https
 ,,,
@@ -20,7 +20,7 @@ Port,State,Who,Purpose
 5704,open,Chase,volleyball 'human-human
 5705,open,Chase,slime volleyball human-ai
 5720,open,Ngoc / dfm,HAT minimap demo
-5885,open,Maria,binary choice observability outcomes experiment
+5885,closed,Maria,binary choice observability outcomes experiment
 5900,blocked,,do not use—blocked by CMU network
 5901,blocked,,do not use—blocked by CMU network
 5902,blocked,,do not use—blocked by CMU network
@@ -32,8 +32,6 @@ Port,State,Who,Purpose
 8970,closed,dfm,moments@cmu (aka moments2)
 8971,closed,dfm,dynamic stocks and flows
 8972,open,dfm,RPS demo
-8974,closed,ErinB,optimal-stopping-feedback game
-8975,closed,ErinB,optimal-stopping-length game
 8976,open,ErinB,optimal-stopping-thresholds game
 8977,open,ErinB,optimal-stopping-length-variability game
 8978,open,ErinB,optimal-stopping-length-visibility game
