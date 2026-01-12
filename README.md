@@ -3,7 +3,7 @@
 Janus (`janus.hss.cmu.edu`) is the DDMLab’s new (early 2022) server. It is a 64 core 256 GB Linux box with
 an 8,604 CUDA core graphics card.
 As of September 2022 Janus is running Pop!_OS version 22.04 LTS, which is essentially the same as
-Ubuntu 22.04 LTS. It is expected that in general the OS version will be upgraded biennially.
+Ubuntu 22.04 LTS.
 Janus, and the disk to which its nightly backups are written, are on a UPS (Uninterruptible Power Supply);
 while this means Janus can be expected not to go down if there’s a power outage no longer than the duration the UPS’s
 battery can supply its power needs, which should be a couple of hours, it doesn’t mean Janus will be usable during
