@@ -187,7 +187,7 @@ added please *always* include a *useful* README.
 Many, probably most, of the things we create in the DDMLab, both online experiments and models, are
 intended to work across two or more similar, but slightly different, conditions. This unfortunately
 tempts folks to code in a fashion that discourages reuse and encourages errors: the temptation is to write it once for one condition,
-than just make a complete verbatim copy of that and change a few constants or lines of code. This results in code
+then just make a complete verbatim copy of that and change a few constants or lines of code. This results in code
 that is not only two or several fold longer than necessary, in addition it makes it difficult for a reader to
 understand how seemingly identical large blocks of code differ, where changes need to be made, and, worst of all,
 requires any changes to be made multiple times. This doesn’t just make life difficult for those who come
