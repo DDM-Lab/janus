@@ -1,12 +1,29 @@
 ## Janus Administrative Tasks ##
 
-This documents a few easy administrative tasks on Janus, that require root access.
+The really biggest and most important administrative task is figuring out what's gone wrong when something does go wrong.
+There's no recipe for this, though!
+
+Good things to learn about in general are, besides general Linux administration,
+
+* ufw, the firewall
+
+* Apache
+
+* sadly, MySQL / MareaDB; I say "sadly" because these really are overkill for the things we typically do in the DDMLab, but folks like to use them
+because they're trendy
+
+* maybe nodeGame, which we used to use a fair bit; bit seems to have mostly fallen off the radar these days, though; note
+that we have one nodeGame instance running with lots of games under it, all served over port 8080
+
+Here are some recipes for a few simple things we've often got to do, that require root access.
 
 These tasks are all done through the command line interface.
 If you are not familiar with this, there are lots of resources on the web for learning about
 it. One possibility is [Canonical’s “The Linux command line for beginners”](https://ubuntu.com/tutorials/command-line-for-beginners#1-overview). However, you’ll need to ignore much of what is in section 3 of this tutorial,
 as it is aimed at someone logging into a Linux machine from its console, and Janus should generally
 only be logged into over SSH.
+
+On the other hand, if you want to use other tools for doing this there's no reason not to, so long as the end result is the same.
 
 To login to Janus you’ll need a terminal window on your own machine connected to the network. How you do
 that depends upon the operating system of you own machine, but it should be straightforward.
@@ -43,7 +60,7 @@ any long strings of the same character or characters in a clear ascending or des
 
 You will then be asked for the initial password, twice. If they are both typed the same, you will
 then be asked for a little further information. It is recommended that at least the users full name,
-in this case “Frodo Baggins,” be supplied things like room number and telephone number are optional,
+in this case “Frodo Baggins,” be supplied; things like room number and telephone number are optional,
 and unlikely to be useful, but it’s harmless to either supply or omit them. If all goes well, the
 user is now created, along with a default group of the same name as the user name (*ie.e* in this case
 `frodo`, as well as their login directory and default shell.
@@ -104,7 +121,7 @@ a chance to change it.
 For security reasons even with root privileges, it is impossible to look up a user’s current password.
 If a user forgets their password, or it is compromised, we must change it to a new one. This is easy,
 and is similar to how a user changes their own password, the main difference is by running as root
-we no longer have to type their old password to set a new one. If the user’s username is `frdo`, simply
+we no longer have to type their old password to set a new one. If the user’s username is `frodo`, simply
 run
 
     sudo passwd frodo
@@ -115,7 +132,7 @@ You will be asked to type the new password twice, and then the job is done.
 
 When someone leaves the group and we wish remove their ability to login to Janus we normally
 disable their account, and archive the home directory in case we need to consult it in the future.
-Here are the steps for a user names `frodo`.
+Here are the steps for a user named `frodo`.
 
 **Step one**: disable the account.
 
@@ -129,7 +146,7 @@ Here are the steps for a user names `frodo`.
 
     sudo systemctl restart ssh
 
-**Step four**: archive their home directory.
+**Step four**: optionally archive their home directory.
 
     sudo tar -cjf /home/former-users/frodo.tgz /home/frodo --remove-files
 
@@ -148,6 +165,8 @@ on by doing
 
 and noting whether or not that prints something that looks like the command you started.
 
+This step is optional, though, as for some, maybe even most, former users it's prudent to leave their stuff readily available.
+
 ### Restarting nodeGame ###
 
 When someone makes a change to a nodeGame game the nodeGame server must be restarted, which
@@ -157,3 +176,63 @@ and then ask someone with root privileges to restart it, which be done with
     sudo systemctl restart nodegame
 
 Note that this typically takes about two minutes to complete, and should not be interrupted.
+
+### Opening a port ###
+
+Commonly folks doing online experiments need one or more ports opened.
+Before asking you to do this it's best if they update the `ports.csv` document, but if they
+don't it's often easier to just do it yourself rather than nagging them.
+Before fiddling anything double check that
+
+1. the port they want opened isn't in use by someone else
+
+2. the port is in the appropriate range as specified in the Janus document
+
+3. the port isn't one of the handful the CMU network folks block; these are noted in `ports.csv`.
+
+Double check the state of things by doing
+
+    sudo ufw status
+
+If all looks well, and you want to open port 7890 for Frodo's ring project do
+
+    sudo ufw allow 7890/tcp comment 'Frodo's ring project'
+
+Then do a `ufw status` again to check it's all as it should be.
+
+### Monitoring uptime ###
+
+While YMMV, I find having a free account on [Uptime Robot](http://uptimerobot.com/) convenient for getting a notification if Janus goes down.
+I just have it ping Janus every few minutes, and send me mail or a text if it isn't up.
+
+If it appears to be down, and I confirm that by and, the first thing to do is see if anything else in CMU, ideally in Porter Hall, is also down.
+More often than not if it looks like Janus is down it's actually the network, and it comes back again after a while.
+Or it could be a power outage.
+
+### Backups ###
+
+This isn't so much a recipe as a description of what's going on.
+
+There is a script, `/root/run-backup`, that is run as a cron job at 3:12 every morning. It makes sure a suitable disk
+is mounted at `/backups/` dumps out the contents of the MySQL / MariaDB databases as text files, and then uses `rsync` to copy much of the contents
+of Janus's disk to the backup. It makes copies of files that go away, too, just in case. It writes lines to `/var/log/backups.log` when it starts and
+finishes.
+
+Since it's all just straightforward copies recovering a file is simply a matter of digging into the directory structure
+on `/backups/` and copying the old version.
+
+I suggest about once a month auditing things a bit by figuring out some arbitrary file that has been changes and should have been
+copied, and using `diff` to make sure its bits are the same.
+
+There is also a little CGI script in `/usr/lib/cgi-bin/recent-backups` that can be used to ascertain when the last successful
+backup completed. and can be useful for another Uptime Robot thingie to alert one to the backup disk not being properly mounted or whatever.
+
+### Other stuff ###
+
+PHP is installed on Janus, and some folks use it. I think there are one or two demos that do, too.
+
+There's a CGI script for allowing folks to download stuff made available o Janus. This used to be
+widely used, but I think now that we're stuffing things into GitHub its value has decreased
+markedly. But it's still there.
+
+There also a little CGI thing for a "Participant Pool." I check with Jeffrey about how much we use that these days.

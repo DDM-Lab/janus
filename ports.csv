@@ -1,6 +1,5 @@
 Port,State,Who,Purpose
 22,open,dfm,ssh
-23,open only to two IP addresses,dfm,telnet (DO NOT allow general access as it is insecure)
 80,open,dfm,http
 443,open,dfm,https
 ,,,
