@@ -236,3 +236,9 @@ widely used, but I think now that we're stuffing things into GitHub its value ha
 markedly. But it's still there.
 
 There also a little CGI thing for a "Participant Pool." I check with Jeffrey about how much we use that these days.
+
+The CMU network folks serve DNS for Janus. The DDMLab owns the domain `ddmlab.com` which needs to be renewed periodically.
+A `whois` lookup turns up the registrar (Verisign) as all three contacts for the domain, but inside their records
+they point to real people, Coty being the owner.
+CMU still serves DNS for it, as an A record, not a CNAME.
+It points to the same IP address as `janus.hss.cmu.edu` does.
