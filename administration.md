@@ -86,7 +86,7 @@ its permissions so the new user owns it and it is in the `ddmlab` group
 **Step six**: allow this user to access Janus over SSH; we do this by creating a file in
 `/etc/ssh/sshd_config.d/`.
 
-    sudo echo 'AllowUsers frodo' > /etc/ssh/sshd_config.d/frodo.conf
+    echo 'AllowUsers frodo' | sudo tee /etc/ssh/sshd_config.d/frodo.conf
 
 Note that you need to replace “frodo” in two places in that command, one the content going into
 the file and the other the name of the file.
